@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   Container,
@@ -12,6 +12,7 @@ import {
 } from "@mui/material";
 import { Visibility, VisibilityOff, PersonOutline, LockOutlined } from "@mui/icons-material";
 import { ReactComponent as EyeIcon } from "../assets/eye.svg";
+import { isUserLoggedIn } from "../util/helper";
 
 function Login() {
   const passwordMinLength = 8;
@@ -21,7 +22,15 @@ function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
   const [keepLoggedIn, setKeepLoggedIn] = useState(false);
+  const isAuthenticated = isUserLoggedIn();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate("/");
+    }
+  }, []);
+
   
   const handlePasswordChange = e => {
     setPassword(e.target.value);
@@ -46,7 +55,7 @@ function Login() {
       } else {
         sessionStorage.setItem("loggedIn", "true");
       }
-      navigate("/dashboard");
+      navigate("/");
     }
   };
 
