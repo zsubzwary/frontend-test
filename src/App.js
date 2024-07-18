@@ -1,24 +1,21 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 import Login from "./pages/login";
-// import Dashboard from './Dashboard';
+import Dashboard from './pages/dashboard';
 // import Issues from './Issues';
 import { CssBaseline } from "@mui/material";
-
-const ProtectedRoute = ({ element }) => {
-  const isLoggedIn =
-    localStorage.getItem("loggedIn") === "true" || sessionStorage.getItem("loggedIn") === "true";
-  return isLoggedIn ? element : <Navigate to="/" />;
-};
+import { ProtectedRoutes } from "./util/ProtectedRoutes";
 
 function App() {
   return (
     <Router>
       <CssBaseline />
       <Routes>
-        <Route path="/" element={<Login />} />
-        {/* <Route path="/dashboard" element={<ProtectedRoute element={<Dashboard />} />} />
-                <Route path="/issues" element={<ProtectedRoute element={<Issues />} />} /> */}
+          <Route element={<ProtectedRoutes/>}>
+            <Route path="/" element={<Dashboard/>} />
+          </Route>
+
+          <Route path="/login" element={<Login />} />
       </Routes>
     </Router>
   );
