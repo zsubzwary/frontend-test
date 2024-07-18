@@ -14,6 +14,10 @@ import { Visibility, VisibilityOff, PersonOutline, LockOutlined } from "@mui/ico
 import { ReactComponent as EyeIcon } from "../assets/eye.svg";
 import { isUserLoggedIn } from "../util/helper";
 
+/**
+ * Renders the login form for user authentication.
+ * If login is sucessful user will be navigated to "/"
+ */
 function Login() {
   const passwordMinLength = 8;
   const loginFormRef = React.useRef();
