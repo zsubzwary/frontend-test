@@ -20,11 +20,16 @@ import { isUserLoggedIn } from "../util/helper";
  */
 function Login() {
   const passwordMinLength = 8;
+  const passwordMaxLength = 30;
+  const usernameMinLength = 6;
+  const usernameMaxLength = 20;
+
   const loginFormRef = React.useRef();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
+  const [usernameError, setUsernameError] = useState(false);
   const [keepLoggedIn, setKeepLoggedIn] = useState(false);
   const isAuthenticated = isUserLoggedIn();
   const navigate = useNavigate();
@@ -35,25 +40,53 @@ function Login() {
     }
   }, []);
 
-  
-  const handlePasswordChange = e => {
-    setPassword(e.target.value);
-    console.log(e.target.value.length);
-    if (e.target.value.length < passwordMinLength) {
-      setPasswordError("Password must be at least 8 characters long");
-    } else {
-      setPasswordError(false);
-    }
-
-  };
-  const handleLogin = (e) => {
-    let isFormFilled = loginFormRef.current.reportValidity();
-    if(password.length < passwordMinLength) {
-      e.preventDefault();
+  const validatePassword = (e) => {
+    let passwordLength = password.length;
+    if (passwordLength === 0) {
       return;
     }
 
-    if (username && password) {
+    if (passwordLength < passwordMinLength || passwordLength > passwordMaxLength) {
+      setPasswordError(
+        `Password must be at between ${passwordMinLength} and ${passwordMaxLength} characters long`
+      );
+      e.preventDefault();
+      return false;
+    } else {
+      setPasswordError(false);
+      return true;
+    }
+  };
+
+  const validateUsername = (e) => {
+    let validCharactersRegex = /^[a-zA-Z0-9_-]+$/;
+    let usernameLength = username.length;
+    if (usernameLength === 0) {
+      return;
+    }
+
+    if (usernameLength < usernameMinLength || usernameLength > usernameMaxLength) {
+      setUsernameError(
+        `Username must be between ${usernameMinLength} and ${usernameMaxLength} characters long`
+      );
+      e.preventDefault();
+      return false;
+    } else if (!validCharactersRegex.test(username)) {
+      setUsernameError("Username can only contain letters, digits, underscore (_) and hyphen (-)");
+      e.preventDefault();
+      return false;
+    } else {
+      setUsernameError(false);
+      return true;
+    }
+  };
+
+  const handleLogin = (e) => {
+    let isFormFilled = loginFormRef.current.reportValidity();
+    const usernameValid = validateUsername(e);
+    const passwordValid = validatePassword(e);
+
+    if (username && password && isFormFilled && usernameValid && passwordValid) {
       if (keepLoggedIn) {
         localStorage.setItem("loggedIn", "true");
       } else {
@@ -68,6 +101,9 @@ function Login() {
       <form ref={loginFormRef}>
         <h2>Login to your account</h2>
         <TextField
+          error={usernameError === false ? false : true}
+          helperText={usernameError}
+          onBlur={validateUsername}
           required
           fullWidth
           margin="normal"
@@ -75,22 +111,23 @@ function Login() {
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           InputProps={{
-            type: "email",
             startAdornment: <PersonOutline />,
           }}
         />
-        
+
         <TextField
-          error={passwordError}
+          error={passwordError === false ? false : true}
           helperText={passwordError}
-          onBlur={handlePasswordChange}
+          onBlur={validatePassword}
           required
           fullWidth
           margin="normal"
           type={showPassword ? "text" : "password"}
           label="Password"
           value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={(e) => {
+            setPassword(e.target.value);
+          }}
           InputProps={{
             endAdornment: (
               <InputAdornment position="end">
@@ -108,7 +145,7 @@ function Login() {
           }
           label="Keep me logged in"
         />
-        <Button variant="contained" color="primary" onClick={handleLogin}>
+        <Button variant="contained" color="primary" onClick={(e) => handleLogin(e)}>
           Login
         </Button>
       </form>
