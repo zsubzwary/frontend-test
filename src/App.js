@@ -1,24 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
+import Login from "./pages/login";
+// import Dashboard from './Dashboard';
+// import Issues from './Issues';
+import { CssBaseline } from "@mui/material";
+
+const ProtectedRoute = ({ element }) => {
+  const isLoggedIn =
+    localStorage.getItem("loggedIn") === "true" || sessionStorage.getItem("loggedIn") === "true";
+  return isLoggedIn ? element : <Navigate to="/" />;
+};
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <CssBaseline />
+      <Routes>
+        <Route path="/" element={<Login />} />
+        {/* <Route path="/dashboard" element={<ProtectedRoute element={<Dashboard />} />} />
+                <Route path="/issues" element={<ProtectedRoute element={<Issues />} />} /> */}
+      </Routes>
+    </Router>
   );
 }
 
