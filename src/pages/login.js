@@ -40,7 +40,7 @@ function Login() {
     }
   }, []);
 
-  const validatePassword = (e) => {
+  const validatePassword = () => {
     let passwordLength = password.length;
     if (passwordLength === 0) {
       return;
@@ -50,7 +50,6 @@ function Login() {
       setPasswordError(
         `Password must be at between ${passwordMinLength} and ${passwordMaxLength} characters long`
       );
-      e.preventDefault();
       return false;
     } else {
       setPasswordError(false);
@@ -58,7 +57,7 @@ function Login() {
     }
   };
 
-  const validateUsername = (e) => {
+  const validateUsername = () => {
     let validCharactersRegex = /^[a-zA-Z0-9_-]+$/;
     let usernameLength = username.length;
     if (usernameLength === 0) {
@@ -69,11 +68,9 @@ function Login() {
       setUsernameError(
         `Username must be between ${usernameMinLength} and ${usernameMaxLength} characters long`
       );
-      e.preventDefault();
       return false;
     } else if (!validCharactersRegex.test(username)) {
       setUsernameError("Username can only contain letters, digits, underscore (_) and hyphen (-)");
-      e.preventDefault();
       return false;
     } else {
       setUsernameError(false);
@@ -83,8 +80,8 @@ function Login() {
 
   const handleLogin = (e) => {
     let isFormFilled = loginFormRef.current.reportValidity();
-    const usernameValid = validateUsername(e);
-    const passwordValid = validatePassword(e);
+    const usernameValid = validateUsername();
+    const passwordValid = validatePassword();
 
     if (username && password && isFormFilled && usernameValid && passwordValid) {
       if (keepLoggedIn) {
@@ -93,6 +90,9 @@ function Login() {
         sessionStorage.setItem("loggedIn", "true");
       }
       navigate("/");
+    }
+    else {
+      e.preventDefault();
     }
   };
 
