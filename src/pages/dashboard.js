@@ -4,12 +4,14 @@ import { useNavigate } from "react-router-dom";
 import { CssBaseline } from "@mui/material";
 import { Box } from "@mui/system";
 import { Typography } from "@mui/material";
+import NavigationMenu from "../components/navigationMenu";
 
 
 export default function Dashboard() {
 
     return (
         <>
+            <NavigationMenu />
             <CssBaseline />
             <Box
                 sx={{
