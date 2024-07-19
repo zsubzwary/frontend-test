@@ -31,6 +31,7 @@ import {
   faMoon,
   faUsers,
 } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from "react-router-dom";
 
 const drawerWidth = 240;
 
@@ -102,6 +103,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== "open" 
 export default function NavigationMenu() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+  const navigate = useNavigate();
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -166,7 +168,12 @@ export default function NavigationMenu() {
               <ListItemText primary={"Projects"} sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
           </ListItem>
-          <ListItem key={"Issues"} disablePadding sx={{ display: "block" }}>
+          <ListItem
+            onClick={() => navigate("/issues")}
+            key={"Issues"}
+            disablePadding
+            sx={{ display: "block" }}
+          >
             <ListItemButton
               sx={{
                 minHeight: 48,
