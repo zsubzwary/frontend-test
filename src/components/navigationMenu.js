@@ -19,6 +19,18 @@ import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
 import { Speed } from "@mui/icons-material";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faCalendarCheck,
+  faExclamationCircle,
+  faGaugeSimpleHigh,
+  faListAlt,
+  faListCheck,
+  faMap,
+  faCog,
+  faMoon,
+  faUsers,
+} from "@fortawesome/free-solid-svg-icons";
 
 const drawerWidth = 240;
 
@@ -129,7 +141,7 @@ export default function NavigationMenu() {
                   justifyContent: "center",
                 }}
               >
-                {<Speed />}
+                {<FontAwesomeIcon icon={faGaugeSimpleHigh} />}
               </ListItemIcon>
               <ListItemText primary={"Dashboard"} sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
@@ -149,7 +161,7 @@ export default function NavigationMenu() {
                   justifyContent: "center",
                 }}
               >
-                {<InboxIcon />}
+                {<FontAwesomeIcon icon={faListCheck} />}
               </ListItemIcon>
               <ListItemText primary={"Projects"} sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
@@ -169,7 +181,7 @@ export default function NavigationMenu() {
                   justifyContent: "center",
                 }}
               >
-                {<InboxIcon />}
+                {<FontAwesomeIcon icon={faExclamationCircle} />}
               </ListItemIcon>
               <ListItemText primary={"Issues"} sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
@@ -189,7 +201,7 @@ export default function NavigationMenu() {
                   justifyContent: "center",
                 }}
               >
-                {<InboxIcon />}
+                {<FontAwesomeIcon icon={faMap} />}
               </ListItemIcon>
               <ListItemText primary={"Map"} sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
@@ -210,11 +222,12 @@ export default function NavigationMenu() {
                   justifyContent: "center",
                 }}
               >
-                {<InboxIcon />}
+                {<FontAwesomeIcon icon={faCalendarCheck} />}
               </ListItemIcon>
               <ListItemText primary={"Planing"} sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
           </ListItem>
+          
           <ListItem key={"Gantt Chart"} disablePadding sx={{ display: "block" }}>
             <ListItemButton
               sx={{
@@ -230,7 +243,7 @@ export default function NavigationMenu() {
                   justifyContent: "center",
                 }}
               >
-                {<InboxIcon />}
+                { <Box sx={{ width: '0.9em', height: '0.9em' }} /> /* { <FontAwesomeIcon style={{ visibility: "hidden" }} icon={faCog} />} */}
               </ListItemIcon>
               <ListItemText primary={"Gantt Chart"} sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
@@ -250,7 +263,7 @@ export default function NavigationMenu() {
                   justifyContent: "center",
                 }}
               >
-                {<InboxIcon />}
+                { <Box sx={{ width: '0.9em', height: '0.9em' }} /> }
               </ListItemIcon>
               <ListItemText primary={"Calendar"} sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
@@ -271,7 +284,27 @@ export default function NavigationMenu() {
                   justifyContent: "center",
                 }}
               >
-                {<InboxIcon />}
+                {<FontAwesomeIcon icon={faListAlt} />}
+              </ListItemIcon>
+              <ListItemText primary={"Checklists"} sx={{ opacity: open ? 1 : 0 }} />
+            </ListItemButton>
+          </ListItem>
+          <ListItem key={"ChecklistsChild"} disablePadding sx={{ display: "block" }}>
+            <ListItemButton
+              sx={{
+                minHeight: 48,
+                justifyContent: open ? "initial" : "center",
+                px: 2.5,
+              }}
+            >
+              <ListItemIcon
+                sx={{
+                  minWidth: 0,
+                  mr: open ? 3 : "auto",
+                  justifyContent: "center",
+                }}
+              >
+                { <Box sx={{ width: '0.9em', height: '0.9em' }} /> }
               </ListItemIcon>
               <ListItemText primary={"Checklists"} sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
@@ -291,7 +324,7 @@ export default function NavigationMenu() {
                   justifyContent: "center",
                 }}
               >
-                {<InboxIcon />}
+                { <Box sx={{ width: '0.9em', height: '0.9em' }} /> }
               </ListItemIcon>
               <ListItemText primary={"Create Checklists"} sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
@@ -312,7 +345,7 @@ export default function NavigationMenu() {
                   justifyContent: "center",
                 }}
               >
-                {<InboxIcon />}
+                {<FontAwesomeIcon icon={faUsers} />}
               </ListItemIcon>
               <ListItemText primary={"Resources"} sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
@@ -332,7 +365,7 @@ export default function NavigationMenu() {
                   justifyContent: "center",
                 }}
               >
-                {<InboxIcon />}
+                { <Box sx={{ width: '0.9em', height: '0.9em' }} /> }
               </ListItemIcon>
               <ListItemText primary={"Teams"} sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
@@ -352,7 +385,7 @@ export default function NavigationMenu() {
                   justifyContent: "center",
                 }}
               >
-                {<InboxIcon />}
+                { <Box sx={{ width: '0.9em', height: '0.9em' }} /> }
               </ListItemIcon>
               <ListItemText primary={"Employees"} sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
@@ -373,7 +406,7 @@ export default function NavigationMenu() {
                   justifyContent: "center",
                 }}
               >
-                {<InboxIcon />}
+                {<FontAwesomeIcon icon={faCog} />}
               </ListItemIcon>
               <ListItemText primary={"Settings"} sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
@@ -393,7 +426,7 @@ export default function NavigationMenu() {
                   justifyContent: "center",
                 }}
               >
-                {<InboxIcon />}
+                { <Box sx={{ width: '0.9em', height: '0.9em' }} /> }
               </ListItemIcon>
               <ListItemText primary={"Partner Settings"} sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
@@ -413,7 +446,7 @@ export default function NavigationMenu() {
                   justifyContent: "center",
                 }}
               >
-                {<InboxIcon />}
+                { <Box sx={{ width: '0.9em', height: '0.9em' }} /> }
               </ListItemIcon>
               <ListItemText primary={"Email Settings"} sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
@@ -433,7 +466,7 @@ export default function NavigationMenu() {
                   justifyContent: "center",
                 }}
               >
-                {<InboxIcon />}
+                { <Box sx={{ width: '0.9em', height: '0.9em' }} /> }
               </ListItemIcon>
               <ListItemText primary={"Users"} sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
@@ -453,7 +486,7 @@ export default function NavigationMenu() {
                   justifyContent: "center",
                 }}
               >
-                {<InboxIcon />}
+                { <Box sx={{ width: '0.9em', height: '0.9em' }} /> }
               </ListItemIcon>
               <ListItemText primary={"Product Settings"} sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
@@ -474,7 +507,7 @@ export default function NavigationMenu() {
                   justifyContent: "center",
                 }}
               >
-                {<InboxIcon />}
+                {<FontAwesomeIcon icon={faMoon} />}
               </ListItemIcon>
               <ListItemText primary={"Appearance"} sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
@@ -495,7 +528,7 @@ export default function NavigationMenu() {
                   justifyContent: "center",
                 }}
               >
-                {<InboxIcon />}
+                {<FontAwesomeIcon icon={faCalendarCheck} />}
               </ListItemIcon>
               <ListItemText primary={"Offer"} sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
