@@ -1,0 +1,20 @@
+.issue-form {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  
+  .switch-container {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .table-container {
+    margin-top: 24px;
+  }
+  
+  .action-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 16px;
+  }
