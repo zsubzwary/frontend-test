@@ -227,7 +227,7 @@ export default function NavigationMenu() {
               <ListItemText primary={"Planing"} sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
           </ListItem>
-          
+
           <ListItem key={"Gantt Chart"} disablePadding sx={{ display: "block" }}>
             <ListItemButton
               sx={{
@@ -243,7 +243,11 @@ export default function NavigationMenu() {
                   justifyContent: "center",
                 }}
               >
-                { <Box sx={{ width: '0.9em', height: '0.9em' }} /> /* { <FontAwesomeIcon style={{ visibility: "hidden" }} icon={faCog} />} */}
+                {
+                  <Box
+                    sx={{ width: "0.9em", height: "0.9em" }}
+                  /> /* { <FontAwesomeIcon style={{ visibility: "hidden" }} icon={faCog} />} */
+                }
               </ListItemIcon>
               <ListItemText primary={"Gantt Chart"} sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
@@ -263,7 +267,7 @@ export default function NavigationMenu() {
                   justifyContent: "center",
                 }}
               >
-                { <Box sx={{ width: '0.9em', height: '0.9em' }} /> }
+                {<Box sx={{ width: "0.9em", height: "0.9em" }} />}
               </ListItemIcon>
               <ListItemText primary={"Calendar"} sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
@@ -304,7 +308,7 @@ export default function NavigationMenu() {
                   justifyContent: "center",
                 }}
               >
-                { <Box sx={{ width: '0.9em', height: '0.9em' }} /> }
+                {<Box sx={{ width: "0.9em", height: "0.9em" }} />}
               </ListItemIcon>
               <ListItemText primary={"Checklists"} sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
@@ -324,7 +328,7 @@ export default function NavigationMenu() {
                   justifyContent: "center",
                 }}
               >
-                { <Box sx={{ width: '0.9em', height: '0.9em' }} /> }
+                {<Box sx={{ width: "0.9em", height: "0.9em" }} />}
               </ListItemIcon>
               <ListItemText primary={"Create Checklists"} sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
@@ -365,7 +369,7 @@ export default function NavigationMenu() {
                   justifyContent: "center",
                 }}
               >
-                { <Box sx={{ width: '0.9em', height: '0.9em' }} /> }
+                {<Box sx={{ width: "0.9em", height: "0.9em" }} />}
               </ListItemIcon>
               <ListItemText primary={"Teams"} sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
@@ -385,7 +389,7 @@ export default function NavigationMenu() {
                   justifyContent: "center",
                 }}
               >
-                { <Box sx={{ width: '0.9em', height: '0.9em' }} /> }
+                {<Box sx={{ width: "0.9em", height: "0.9em" }} />}
               </ListItemIcon>
               <ListItemText primary={"Employees"} sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
@@ -426,7 +430,7 @@ export default function NavigationMenu() {
                   justifyContent: "center",
                 }}
               >
-                { <Box sx={{ width: '0.9em', height: '0.9em' }} /> }
+                {<Box sx={{ width: "0.9em", height: "0.9em" }} />}
               </ListItemIcon>
               <ListItemText primary={"Partner Settings"} sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
@@ -446,7 +450,7 @@ export default function NavigationMenu() {
                   justifyContent: "center",
                 }}
               >
-                { <Box sx={{ width: '0.9em', height: '0.9em' }} /> }
+                {<Box sx={{ width: "0.9em", height: "0.9em" }} />}
               </ListItemIcon>
               <ListItemText primary={"Email Settings"} sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
@@ -466,7 +470,7 @@ export default function NavigationMenu() {
                   justifyContent: "center",
                 }}
               >
-                { <Box sx={{ width: '0.9em', height: '0.9em' }} /> }
+                {<Box sx={{ width: "0.9em", height: "0.9em" }} />}
               </ListItemIcon>
               <ListItemText primary={"Users"} sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
@@ -486,7 +490,7 @@ export default function NavigationMenu() {
                   justifyContent: "center",
                 }}
               >
-                { <Box sx={{ width: '0.9em', height: '0.9em' }} /> }
+                {<Box sx={{ width: "0.9em", height: "0.9em" }} />}
               </ListItemIcon>
               <ListItemText primary={"Product Settings"} sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
