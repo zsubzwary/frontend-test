@@ -5,6 +5,7 @@ import Dashboard from './pages/dashboard';
 // import Issues from './Issues';
 import { CssBaseline } from "@mui/material";
 import { ProtectedRoutes } from "./util/ProtectedRoutes";
+import Issues from "./pages/issues";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Routes>
           <Route element={<ProtectedRoutes/>}>
             <Route path="/" element={<Dashboard/>} />
+            <Route path="/issues" element={<Issues />} />
           </Route>
 
           <Route path="/login" element={<Login />} />
