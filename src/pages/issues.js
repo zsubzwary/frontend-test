@@ -27,7 +27,7 @@ import { dataTransformer, logout } from "../util/helper";
 import { useNavigate } from "react-router-dom";
 import moment from "moment";
 import IssueContactDataGrid from "../components/data-grid/issue-contact-data-grid";
-// import "../css/issue-page.css"; // Import CSS for custom styling
+import { showSnackbar } from "../events/snackBarEmitter";
 
 const Issues = () => {
   const [issue, setIssue] = useState({
@@ -43,6 +43,7 @@ const Issues = () => {
   });
 
   const [inputErrors, setInputErrors] = useState({});
+  const [assignContactInputErrors, setAssignContactInputErrors] = useState({});
 
   const [selectedUser, setSelectedUser] = useState("");
   const [selectedRole, setSelectedRole] = useState("");
@@ -67,18 +68,35 @@ const Issues = () => {
 
   const handleRoleChange = (event) => {
     setSelectedRole(event.target.value);
+    setAssignContactInputErrors((prevErrors) => ({ ...prevErrors, role: "" }));
   };
 
   const handleUserChange = (event) => {
     setSelectedUser(event.target.value);
+    setAssignContactInputErrors((prevErrors) => ({ ...prevErrors, user: "" }));
+  };
+
+  const validateIssueContact = () => {
+    let tempErrors = {};
+    if (!selectedRole) tempErrors.role = "Please select role";
+    if (!selectedUser) tempErrors.user = "Please select user";
+    setAssignContactInputErrors(tempErrors);
+    return Object.keys(tempErrors).length === 0;
   };
 
   const handleAssignUser = () => {
+    let isValid = validateIssueContact();
+
     if (selectedRole && selectedUser) {
       const userDetails = userOptions.find((user) => user.value === selectedUser);
       const existingUser = assignedUsers.find((user) => user.id === userDetails.value);
 
-      if (!existingUser) {
+      if (existingUser) {
+        setAssignContactInputErrors((prevErrors) => ({
+          ...prevErrors,
+          user: "User already assigned",
+        }));
+      } else {
         let role = roleOptions.find((role) => role.value === selectedRole).label;
         let newUserData = userData.find((user) => user.id === selectedUser);
         let newUser = [
@@ -92,6 +110,7 @@ const Issues = () => {
           },
         ];
         setAssignedUsers(newUser);
+        showSnackbar("User assigned successfully", 3000);
       }
     } else {
       console.warn("Please select role and user");
@@ -275,7 +294,12 @@ const Issues = () => {
         </Typography>
 
         <Box sx={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: 3 }}>
-          <FormControl sx={{ gridColumn: "span 2" }} fullWidth margin="normal">
+          <FormControl
+            sx={{ gridColumn: "span 2" }}
+            fullWidth
+            margin="normal"
+            error={!!assignContactInputErrors.role}
+          >
             <InputLabel shrink>Select Role</InputLabel>
             <Select
               notched
@@ -290,8 +314,14 @@ const Issues = () => {
                 </MenuItem>
               ))}
             </Select>
+            <FormHelperText>{assignContactInputErrors.role}</FormHelperText>
           </FormControl>
-          <FormControl sx={{ gridColumn: "span 2" }} fullWidth margin="normal">
+          <FormControl
+            sx={{ gridColumn: "span 2" }}
+            fullWidth
+            margin="normal"
+            error={!!assignContactInputErrors.user}
+          >
             <InputLabel shrink>Select User</InputLabel>
             <Select
               notched
@@ -306,6 +336,7 @@ const Issues = () => {
                 </MenuItem>
               ))}
             </Select>
+            <FormHelperText>{assignContactInputErrors.user}</FormHelperText>
           </FormControl>
 
           <FormControl fullWidth margin="normal">
