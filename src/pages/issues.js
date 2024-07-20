@@ -158,7 +158,7 @@ const Issues = () => {
 
   return (
     <Box>
-      <Container sx={{paddingBottom: '3rem'}}>
+      <Container sx={{ paddingBottom: "3rem" }}>
         <Box display={"flex"} justifyContent={"end"} gap={"15px"}>
           <Button
             variant="outlined"
@@ -321,31 +321,31 @@ const Issues = () => {
                 InputLabelProps={{ shrink: true }}
               /> */}
                 <LocalizationProvider dateAdapter={AdapterMoment}>
-      <DatePicker
-        format="DD.MM.YYYY"
-        label="Repair Date"
-        name="repairDate"
-        value={issue.repairDate ? moment(issue.repairDate) : null}
-        onChange={(date) =>
-          handleCreateIssueInputChange({ target: { name: "repairDate", value: date } })
-        }
-        slotProps={{
-          textField: {
-            error: !!inputErrors.repairDate,
-            helperText: inputErrors.repairDate,
-            InputLabelProps: { shrink: true },
-            sx: {
-              '& .MuiInputAdornment-root': {
-                '& .MuiSvgIcon-root': {
-                  fontSize: '1.25rem', // Adjust the size as needed
-                },
-              },
-              marginTop: '16px'
-            },
-          },
-        }}
-      />
-    </LocalizationProvider>
+                  <DatePicker
+                    format="DD.MM.YYYY"
+                    label="Repair Date"
+                    name="repairDate"
+                    value={issue.repairDate ? moment(issue.repairDate) : null}
+                    onChange={(date) =>
+                      handleCreateIssueInputChange({ target: { name: "repairDate", value: date } })
+                    }
+                    slotProps={{
+                      textField: {
+                        error: !!inputErrors.repairDate,
+                        helperText: inputErrors.repairDate,
+                        InputLabelProps: { shrink: true },
+                        sx: {
+                          "& .MuiInputAdornment-root": {
+                            "& .MuiSvgIcon-root": {
+                              fontSize: "1.25rem", // Adjust the size as needed
+                            },
+                          },
+                          marginTop: "16px",
+                        },
+                      },
+                    }}
+                  />
+                </LocalizationProvider>
               </FormControl>
 
               <FormControl fullWidth margin="normal">
