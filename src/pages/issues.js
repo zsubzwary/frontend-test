@@ -12,6 +12,7 @@ import {
   Typography,
   Box,
   InputAdornment,
+  FormHelperText,
 } from "@mui/material";
 import {
   priorityOptions,
@@ -41,6 +42,8 @@ const Issues = () => {
     hub: false,
   });
 
+  const [inputErrors, setInputErrors] = useState({});
+
   const [selectedUser, setSelectedUser] = useState("");
   const [selectedRole, setSelectedRole] = useState("");
 
@@ -59,6 +62,7 @@ const Issues = () => {
       ...issue,
       [name]: type === "checkbox" ? checked : value ?? "",
     });
+    setInputErrors((prevErrors) => ({ ...prevErrors, [name]: "" }));
   };
 
   const handleRoleChange = (event) => {
@@ -98,9 +102,29 @@ const Issues = () => {
     setAssignedUsers(assignedUsers.filter((user) => user.id !== id));
   };
 
+  const validateCreateIssue = () => {
+    let tempErrors = {};
+    if (!issue.title) tempErrors.title = "Please enter title";
+    if (!issue.priority) tempErrors.priority = "Please select priority";
+    if (!issue.dcSwitchStatus) tempErrors.dcSwitchStatus = "Please select DC Switch Status";
+    if (!issue.status) tempErrors.status = "Please select status";
+    if (!issue.description) tempErrors.description = "Please enter description";
+    if (!issue.repairDate) tempErrors.repairDate = "Please select repair date";
+    if (!issue.timeEstimate) tempErrors.timeEstimate = "Please enter time estimate";
+
+    setInputErrors(tempErrors);
+    return Object.keys(tempErrors).length === 0;
+  };
+
   const handleSaveChanges = () => {
+    debugger;
     setLastUpdatedOn(moment());
     console.log("Current changes - Not saved yet:", issue);
+    let isValid = validateCreateIssue();
+
+    if (isValid) {
+      console.log("Current changes - Saved:", issue);
+    }
   };
 
   return (
@@ -113,16 +137,18 @@ const Issues = () => {
       </Typography>
       <form className="issue-form">
         <Box sx={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: 3 }}>
-          <TextField
-            label="Title"
-            name="title"
-            value={issue.title}
-            onChange={handleCreateIssueInputChange}
-            fullWidth
-            margin="normal"
-            InputLabelProps={{ shrink: true }}
-          />
           <FormControl fullWidth margin="normal">
+            <TextField
+              error={!!inputErrors.title}
+              helperText={inputErrors.title}
+              label="Title"
+              name="title"
+              value={issue.title}
+              onChange={handleCreateIssueInputChange}
+              InputLabelProps={{ shrink: true }}
+            />
+          </FormControl>
+          <FormControl fullWidth margin="normal" error={!!inputErrors.priority}>
             <InputLabel shrink>Priority</InputLabel>
             <Select
               notched
@@ -137,8 +163,9 @@ const Issues = () => {
                 </MenuItem>
               ))}
             </Select>
+            <FormHelperText>{inputErrors.priority}</FormHelperText>
           </FormControl>
-          <FormControl fullWidth margin="normal">
+          <FormControl fullWidth margin="normal" error={!!inputErrors.dcSwitchStatus}>
             <InputLabel shrink>DC Switch Status</InputLabel>
             <Select
               notched
@@ -153,8 +180,9 @@ const Issues = () => {
                 </MenuItem>
               ))}
             </Select>
+            <FormHelperText>{inputErrors.dcSwitchStatus}</FormHelperText>
           </FormControl>
-          <FormControl fullWidth margin="normal">
+          <FormControl fullWidth margin="normal" error={!!inputErrors.status}>
             <InputLabel shrink>Status</InputLabel>
             <Select
               notched
@@ -169,6 +197,7 @@ const Issues = () => {
                 </MenuItem>
               ))}
             </Select>
+            <FormHelperText>{inputErrors.status}</FormHelperText>
           </FormControl>
           <div className="switch-container">
             <Typography component="div">
@@ -184,42 +213,55 @@ const Issues = () => {
         <br></br>
 
         <Box sx={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: 3, width: "100%" }}>
-          <TextField
-            sx={{ gridColumn: "span 2" }}
-            label="Description"
-            name="description"
-            value={issue.description}
-            onChange={handleCreateIssueInputChange}
-            fullWidth
-            margin="normal"
-            multiline
-            rows={4}
-            InputLabelProps={{ shrink: true }}
-            inputProps={{
-              endAdornment: <FontAwesomeIcon icon={faCalendar} />,
-            }}
-          />
+          <FormControl fullWidth margin="normal">
+            <TextField
+              error={!!inputErrors.description}
+              helperText={inputErrors.description}
+              sx={{ gridColumn: "span 2" }}
+              label="Description"
+              name="description"
+              value={issue.description}
+              onChange={handleCreateIssueInputChange}
+              fullWidth
+              margin="normal"
+              multiline
+              rows={4}
+              InputLabelProps={{ shrink: true }}
+              inputProps={{
+                endAdornment: <FontAwesomeIcon icon={faCalendar} />,
+              }}
+            />
+          </FormControl>
 
-          <TextField
-            label="Repair Date"
-            name="repairDate"
-            value={issue.repairDate}
-            onChange={handleCreateIssueInputChange}
-            fullWidth
-            margin="normal"
-            type="date"
-            InputLabelProps={{ shrink: true }}
-          />
-          <TextField
-            label="Time Estimate Hours"
-            name="timeEstimate"
-            value={issue.timeEstimate}
-            onChange={handleCreateIssueInputChange}
-            fullWidth
-            margin="normal"
-            type="number"
-            InputLabelProps={{ shrink: true }}
-          />
+          <FormControl fullWidth margin="normal">
+            <TextField
+              error={!!inputErrors.repairDate}
+              helperText={inputErrors.repairDate}
+              label="Repair Date"
+              name="repairDate"
+              value={issue.repairDate}
+              onChange={handleCreateIssueInputChange}
+              fullWidth
+              margin="normal"
+              type="date"
+              InputLabelProps={{ shrink: true }}
+            />
+          </FormControl>
+
+          <FormControl fullWidth margin="normal">
+            <TextField
+              error={!!inputErrors.timeEstimate}
+              helperText={inputErrors.timeEstimate}
+              label="Time Estimate Hours"
+              name="timeEstimate"
+              value={issue.timeEstimate}
+              onChange={handleCreateIssueInputChange}
+              fullWidth
+              margin="normal"
+              type="number"
+              InputLabelProps={{ shrink: true }}
+            />
+          </FormControl>
           <Typography component="div">
             Hub
             <Switch checked={issue.hub} onChange={handleCreateIssueInputChange} name="hub" />
