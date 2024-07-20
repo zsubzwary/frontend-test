@@ -104,21 +104,181 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== "open" 
 
 export default function NavigationMenu() {
   const theme = useTheme();
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = React.useState(false);
   const navigate = useNavigate();
   const colorMode = useContext(ColorModeContext);
-  const [selectedIndex, setSelectedIndex] = React.useState(1);
+  const [selectedIndex, setSelectedIndex] = React.useState(0);
+
+  const menuItems = [
+    {
+      key: "dashboard",
+      displayName: "Dashboard",
+      icon: <FontAwesomeIcon icon={faGaugeSimpleHigh} />,
+      selectedIndex: 0,
+      route: "/",
+    },
+    {
+      key: "projects",
+      displayName: "Projects",
+      icon: <FontAwesomeIcon icon={faListCheck} />,
+      selectedIndex: 1,
+      route: "/projects",
+    },
+    {
+      key: "issues",
+      displayName: "Issues",
+      icon: <FontAwesomeIcon icon={faExclamationCircle} />,
+      selectedIndex: 2,
+      route: "/issues",
+    },
+    {
+      key: "map",
+      displayName: "Map",
+      icon: <FontAwesomeIcon icon={faMap} />,
+      selectedIndex: 3,
+      route: "/map",
+    },
+    {
+      key: "planning",
+      displayName: "Planning",
+      icon: <FontAwesomeIcon icon={faCalendarCheck} />,
+      selectedIndex: 4,
+      route: "/planning",
+      divider: true,
+    },
+    {
+      key: "ganttChart",
+      displayName: "Gantt Chart",
+      icon: <Box sx={{ width: "0.9em", height: "0.9em" }} />,
+      selectedIndex: 5,
+      route: "/gantt-chart",
+      primaryTypographyProps: { fontSize: "0.88em" },
+    },
+    {
+      key: "calendar",
+      displayName: "Calendar",
+      icon: <Box sx={{ width: "0.9em", height: "0.9em" }} />,
+      selectedIndex: 6,
+      route: "/calendar",
+      primaryTypographyProps: { fontSize: "0.88em" },
+    },
+    {
+      key: "checklists",
+      displayName: "Checklists",
+      icon: <FontAwesomeIcon icon={faListAlt} />,
+      selectedIndex: 7,
+      route: "/checklists",
+      divider: true,
+    },
+    {
+      key: "checklistsChild",
+      displayName: "Checklists",
+      icon: <Box sx={{ width: "0.9em", height: "0.9em" }} />,
+      selectedIndex: 8,
+      route: "/checklists-child",
+      primaryTypographyProps: { fontSize: "0.88em" },
+    },
+    {
+      key: "createChecklists",
+      displayName: "Create Checklists",
+      icon: <Box sx={{ width: "0.9em", height: "0.9em" }} />,
+      selectedIndex: 9,
+      route: "/create-checklists",
+      primaryTypographyProps: { fontSize: "0.88em" },
+    },
+    {
+      key: "resources",
+      displayName: "Resources",
+      icon: <FontAwesomeIcon icon={faUsers} />,
+      selectedIndex: 10,
+      route: "/resources",
+      divider: true,
+    },
+    {
+      key: "teams",
+      displayName: "Teams",
+      icon: <Box sx={{ width: "0.9em", height: "0.9em" }} />,
+      selectedIndex: 11,
+      route: "/teams",
+      primaryTypographyProps: { fontSize: "0.88em" },
+    },
+    {
+      key: "employees",
+      displayName: "Employees",
+      icon: <Box sx={{ width: "0.9em", height: "0.9em" }} />,
+      selectedIndex: 12,
+      route: "/employees",
+      primaryTypographyProps: { fontSize: "0.88em" },
+    },
+    {
+      key: "settings",
+      displayName: "Settings",
+      icon: <FontAwesomeIcon icon={faCog} />,
+      selectedIndex: 13,
+      route: "/settings",
+      divider: true,
+    },
+    {
+      key: "partnerSettings",
+      displayName: "Partner Settings",
+      icon: <Box sx={{ width: "0.9em", height: "0.9em" }} />,
+      selectedIndex: 14,
+      route: "/partner-settings",
+      primaryTypographyProps: { fontSize: "0.88em" },
+    },
+    {
+      key: "emailSettings",
+      displayName: "Email Settings",
+      icon: <Box sx={{ width: "0.9em", height: "0.9em" }} />,
+      selectedIndex: 15,
+      route: "/email-settings",
+      primaryTypographyProps: { fontSize: "0.88em" },
+    },
+    {
+      key: "users",
+      displayName: "Users",
+      icon: <Box sx={{ width: "0.9em", height: "0.9em" }} />,
+      selectedIndex: 16,
+      route: "/users",
+      primaryTypographyProps: { fontSize: "0.88em" },
+    },
+    {
+      key: "productSettings",
+      displayName: "Product Settings",
+      icon: <Box sx={{ width: "0.9em", height: "0.9em" }} />,
+      selectedIndex: 17,
+      route: "/product-settings",
+      primaryTypographyProps: { fontSize: "0.88em" },
+    },
+    {
+      key: "appearance",
+      displayName: "Appearance",
+      icon: <FontAwesomeIcon icon={faMoon} />,
+      // selectedIndex: 18,
+      // route: "/appearance",
+      divider: true,
+    },
+    {
+      key: "darkModeSwitch",
+      displayName: "",
+      icon: <Box sx={{ width: "0.9em", height: "0.9em" }} />,
+      component: <DarkModeSwitch handleThemeChange={colorMode.toggleColorMode} />,
+    },
+    {
+      key: "offer",
+      displayName: "Offer",
+      icon: <FontAwesomeIcon icon={faCalendarCheck} />,
+      selectedIndex: 19,
+      route: "/offer",
+      divider: true,
+    },
+  ];
+
+  console.log('string', selectedIndex);
 
   const handleListItemClick = (event, index) => {
-    setSelectedIndex(index);
-    if (index === 0) {
-      navigate('/');
-    }
-    else if(index === 2) {
-      navigate('/issues');
-    }
-    else  {
-      navigate('/blank');
+    if (index === 0 || index) {
+      setSelectedIndex(index);
     }
   };
 
@@ -127,7 +287,7 @@ export default function NavigationMenu() {
   };
 
   const handleDrawerClose = () => {
-    setOpen(true);
+    setOpen(false);
   };
 
   return (
@@ -145,517 +305,50 @@ export default function NavigationMenu() {
         <DrawerHeader></DrawerHeader>
         <Divider />
         <List style={{ marginTop: "1rem" }}>
-          <ListItem key={"Dashboard"} disablePadding sx={{ display: "block" }}>
-            <ListItemButton
-              selected={selectedIndex === 0}
-              onClick={(event) => handleListItemClick(event, 0)}
-              sx={{
-                minHeight: 48,
-                justifyContent: open ? "initial" : "center",
-                px: 2.5,
-              }}
-            >
-              <ListItemIcon
-                sx={{
-                  minWidth: 0,
-                  mr: open ? 3 : "auto",
-                  justifyContent: "center",
-                }}
+          {menuItems.map((item, index) => (
+            <React.Fragment key={item.route}>
+              {item.divider && <Divider />}
+              <ListItem
+                key={item.key}
+                disablePadding
+                sx={{ display: "block" }}
+                onClick={item.route && (() => navigate(item.route))}
               >
-                {<FontAwesomeIcon icon={faGaugeSimpleHigh} />}
-              </ListItemIcon>
-              <ListItemText primary={"Dashboard"} sx={{ opacity: open ? 1 : 0 }} />
-            </ListItemButton>
-          </ListItem>
-          <ListItem key={"Projects"} disablePadding sx={{ display: "block" }}>
-            <ListItemButton
-              selected={selectedIndex === 1}
-              onClick={(event) => handleListItemClick(event, 1)}
-              sx={{
-                minHeight: 48,
-                justifyContent: open ? "initial" : "center",
-                px: 2.5,
-              }}
-            >
-              <ListItemIcon
-                sx={{
-                  minWidth: 0,
-                  mr: open ? 3 : "auto",
-                  justifyContent: "center",
-                }}
-              >
-                {<FontAwesomeIcon icon={faListCheck} />}
-              </ListItemIcon>
-              <ListItemText primary={"Projects"} sx={{ opacity: open ? 1 : 0 }} />
-            </ListItemButton>
-          </ListItem>
-          <ListItem
-            onClick={() => navigate("/issues")}
-            key={"Issues"}
-            disablePadding
-            sx={{ display: "block" }}
-          >
-            <ListItemButton
-              selected={selectedIndex === 2}
-              onClick={(event) => handleListItemClick(event, 2)}
-              sx={{
-                minHeight: 48,
-                justifyContent: open ? "initial" : "center",
-                px: 2.5,
-              }}
-            >
-              <ListItemIcon
-                sx={{
-                  minWidth: 0,
-                  mr: open ? 3 : "auto",
-                  justifyContent: "center",
-                }}
-              >
-                {<FontAwesomeIcon icon={faExclamationCircle} />}
-              </ListItemIcon>
-              <ListItemText primary={"Issues"} sx={{ opacity: open ? 1 : 0 }} />
-            </ListItemButton>
-          </ListItem>
-          <ListItem key={"Map"} disablePadding sx={{ display: "block" }}>
-            <ListItemButton
-              selected={selectedIndex === 3}
-              onClick={(event) => handleListItemClick(event, 3)}
-              sx={{
-                minHeight: 48,
-                justifyContent: open ? "initial" : "center",
-                px: 2.5,
-              }}
-            >
-              <ListItemIcon
-                sx={{
-                  minWidth: 0,
-                  mr: open ? 3 : "auto",
-                  justifyContent: "center",
-                }}
-              >
-                <FontAwesomeIcon icon={faMap} />
-              </ListItemIcon>
-              <ListItemText primary={"Map"} sx={{ opacity: open ? 1 : 0 }} />
-            </ListItemButton>
-          </ListItem>
-          <Divider />
-          <ListItem key={"Planing"} disablePadding sx={{ display: "block" }}>
-            <ListItemButton
-              selected={selectedIndex === 4}
-              onClick={(event) => handleListItemClick(event, 4)}
-              sx={{
-                minHeight: 48,
-                justifyContent: open ? "initial" : "center",
-                px: 2.5,
-              }}
-            >
-              <ListItemIcon
-                sx={{
-                  minWidth: 0,
-                  mr: open ? 3 : "auto",
-                  justifyContent: "center",
-                }}
-              >
-                {<FontAwesomeIcon icon={faCalendarCheck} />}
-              </ListItemIcon>
-              <ListItemText primary={"Planning"} sx={{ opacity: open ? 1 : 0 }} />
-            </ListItemButton>
-          </ListItem>
-
-          <ListItem key={"Gantt Chart"} disablePadding sx={{ display: "block" }}>
-            <ListItemButton
-              selected={selectedIndex === 5}
-              onClick={(event) => handleListItemClick(event, 5)}
-              sx={{
-                minHeight: 48,
-                justifyContent: open ? "initial" : "center",
-                px: 2.5,
-              }}
-            >
-              <ListItemIcon
-                sx={{
-                  minWidth: 0,
-                  mr: open ? 3 : "auto",
-                  justifyContent: "center",
-                }}
-              >
-                {
-                  <Box
-                    sx={{ width: "0.9em", height: "0.9em" }}
-                  /> /* { <FontAwesomeIcon style={{ visibility: "hidden" }} icon={faCog} />} */
-                }
-              </ListItemIcon>
-              <ListItemText
-                primary={"Gantt Chart"}
-                primaryTypographyProps={{ fontSize: "0.88rem" }}
-                sx={{ opacity: open ? 1 : 0, fontSize: "6px !important" }}
-              />
-            </ListItemButton>
-          </ListItem>
-          <ListItem key={"Calendar"} disablePadding sx={{ display: "block" }}>
-            <ListItemButton
-              selected={selectedIndex === 6}
-              onClick={(event) => handleListItemClick(event, 6)}
-              sx={{
-                minHeight: 48,
-                justifyContent: open ? "initial" : "center",
-                px: 2.5,
-              }}
-            >
-              <ListItemIcon
-                sx={{
-                  minWidth: 0,
-                  mr: open ? 3 : "auto",
-                  justifyContent: "center",
-                }}
-              >
-                {<Box sx={{ width: "0.9em", height: "0.9em" }} />}
-              </ListItemIcon>
-              <ListItemText
-                primary={"Calendar"}
-                primaryTypographyProps={{ fontSize: "0.88rem" }}
-                sx={{ opacity: open ? 1 : 0 }}
-              />
-            </ListItemButton>
-          </ListItem>
-          <Divider />
-          <ListItem key={"Checklists"} disablePadding sx={{ display: "block" }}>
-            <ListItemButton
-              selected={selectedIndex === 7}
-              onClick={(event) => handleListItemClick(event, 7)}
-              sx={{
-                minHeight: 48,
-                justifyContent: open ? "initial" : "center",
-                px: 2.5,
-              }}
-            >
-              <ListItemIcon
-                sx={{
-                  minWidth: 0,
-                  mr: open ? 3 : "auto",
-                  justifyContent: "center",
-                }}
-              >
-                {<FontAwesomeIcon icon={faListAlt} />}
-              </ListItemIcon>
-              <ListItemText primary={"Checklists"} sx={{ opacity: open ? 1 : 0 }} />
-            </ListItemButton>
-          </ListItem>
-          <ListItem key={"ChecklistsChild"} disablePadding sx={{ display: "block" }}>
-            <ListItemButton
-              selected={selectedIndex === 8}
-              onClick={(event) => handleListItemClick(event, 8)}
-              sx={{
-                minHeight: 48,
-                justifyContent: open ? "initial" : "center",
-                px: 2.5,
-              }}
-            >
-              <ListItemIcon
-                sx={{
-                  minWidth: 0,
-                  mr: open ? 3 : "auto",
-                  justifyContent: "center",
-                }}
-              >
-                {<Box sx={{ width: "0.9em", height: "0.9em" }} />}
-              </ListItemIcon>
-              <ListItemText
-                primary={"Checklists"}
-                primaryTypographyProps={{ fontSize: "0.88rem" }}
-                sx={{ opacity: open ? 1 : 0 }}
-              />
-            </ListItemButton>
-          </ListItem>
-          <ListItem key={"Create Checklists"} disablePadding sx={{ display: "block" }}>
-            <ListItemButton
-              selected={selectedIndex === 9}
-              onClick={(event) => handleListItemClick(event, 9)}
-              sx={{
-                minHeight: 48,
-                justifyContent: open ? "initial" : "center",
-                px: 2.5,
-              }}
-            >
-              <ListItemIcon
-                sx={{
-                  minWidth: 0,
-                  mr: open ? 3 : "auto",
-                  justifyContent: "center",
-                }}
-              >
-                {<Box sx={{ width: "0.9em", height: "0.9em" }} />}
-              </ListItemIcon>
-              <ListItemText
-                primary={"Create Checklists"}
-                primaryTypographyProps={{ fontSize: "0.88rem" }}
-                sx={{ opacity: open ? 1 : 0 }}
-              />
-            </ListItemButton>
-          </ListItem>
-          <Divider />
-          <ListItem key={"Resources"} disablePadding sx={{ display: "block" }}>
-            <ListItemButton
-              selected={selectedIndex === 10}
-              onClick={(event) => handleListItemClick(event, 10)}
-              sx={{
-                minHeight: 48,
-                justifyContent: open ? "initial" : "center",
-                px: 2.5,
-              }}
-            >
-              <ListItemIcon
-                sx={{
-                  minWidth: 0,
-                  mr: open ? 3 : "auto",
-                  justifyContent: "center",
-                }}
-              >
-                {<FontAwesomeIcon icon={faUsers} />}
-              </ListItemIcon>
-              <ListItemText primary={"Resources"} sx={{ opacity: open ? 1 : 0 }} />
-            </ListItemButton>
-          </ListItem>
-          <ListItem key={"Teams"} disablePadding sx={{ display: "block" }}>
-            <ListItemButton
-              selected={selectedIndex === 11}
-              onClick={(event) => handleListItemClick(event, 11)}
-              sx={{
-                minHeight: 48,
-                justifyContent: open ? "initial" : "center",
-                px: 2.5,
-              }}
-            >
-              <ListItemIcon
-                sx={{
-                  minWidth: 0,
-                  mr: open ? 3 : "auto",
-                  justifyContent: "center",
-                }}
-              >
-                {<Box sx={{ width: "0.9em", height: "0.9em" }} />}
-              </ListItemIcon>
-              <ListItemText
-                primary={"Teams"}
-                primaryTypographyProps={{ fontSize: "0.88rem" }}
-                sx={{ opacity: open ? 1 : 0 }}
-              />
-            </ListItemButton>
-          </ListItem>
-          <ListItem key={"Employees"} disablePadding sx={{ display: "block" }}>
-            <ListItemButton
-              selected={selectedIndex === 12}
-              onClick={(event) => handleListItemClick(event, 12)}
-              sx={{
-                minHeight: 48,
-                justifyContent: open ? "initial" : "center",
-                px: 2.5,
-              }}
-            >
-              <ListItemIcon
-                sx={{
-                  minWidth: 0,
-                  mr: open ? 3 : "auto",
-                  justifyContent: "center",
-                }}
-              >
-                {<Box sx={{ width: "0.9em", height: "0.9em" }} />}
-              </ListItemIcon>
-              <ListItemText
-                primary={"Employees"}
-                primaryTypographyProps={{ fontSize: "0.88rem" }}
-                sx={{ opacity: open ? 1 : 0 }}
-              />
-            </ListItemButton>
-          </ListItem>
-          <Divider />
-          <ListItem key={"Settings"} disablePadding sx={{ display: "block" }}>
-            <ListItemButton
-              selected={selectedIndex === 13}
-              onClick={(event) => handleListItemClick(event, 13)}
-              sx={{
-                minHeight: 48,
-                justifyContent: open ? "initial" : "center",
-                px: 2.5,
-              }}
-            >
-              <ListItemIcon
-                sx={{
-                  minWidth: 0,
-                  mr: open ? 3 : "auto",
-                  justifyContent: "center",
-                }}
-              >
-                {<FontAwesomeIcon icon={faCog} />}
-              </ListItemIcon>
-              <ListItemText primary={"Settings"} sx={{ opacity: open ? 1 : 0 }} />
-            </ListItemButton>
-          </ListItem>
-          <ListItem key={"Partner Settings"} disablePadding sx={{ display: "block" }}>
-            <ListItemButton
-              selected={selectedIndex === 14}
-              onClick={(event) => handleListItemClick(event, 14)}
-              sx={{
-                minHeight: 48,
-                justifyContent: open ? "initial" : "center",
-                px: 2.5,
-              }}
-            >
-              <ListItemIcon
-                sx={{
-                  minWidth: 0,
-                  mr: open ? 3 : "auto",
-                  justifyContent: "center",
-                }}
-              >
-                {<Box sx={{ width: "0.9em", height: "0.9em" }} />}
-              </ListItemIcon>
-              <ListItemText
-                primary={"Partner Settings"}
-                primaryTypographyProps={{ fontSize: "0.88rem" }}
-                sx={{ opacity: open ? 1 : 0 }}
-              />
-            </ListItemButton>
-          </ListItem>
-          <ListItem key={"Email Settings"} disablePadding sx={{ display: "block" }}>
-            <ListItemButton
-              selected={selectedIndex === 15}
-              onClick={(event) => handleListItemClick(event, 15)}
-              sx={{
-                minHeight: 48,
-                justifyContent: open ? "initial" : "center",
-                px: 2.5,
-              }}
-            >
-              <ListItemIcon
-                sx={{
-                  minWidth: 0,
-                  mr: open ? 3 : "auto",
-                  justifyContent: "center",
-                }}
-              >
-                {<Box sx={{ width: "0.9em", height: "0.9em" }} />}
-              </ListItemIcon>
-              <ListItemText
-                primary={"Email Settings"}
-                primaryTypographyProps={{ fontSize: "0.88rem" }}
-                sx={{ opacity: open ? 1 : 0 }}
-              />
-            </ListItemButton>
-          </ListItem>
-          <ListItem key={"Users"} disablePadding sx={{ display: "block" }}>
-            <ListItemButton
-              selected={selectedIndex === 16}
-              onClick={(event) => handleListItemClick(event, 16)}
-              sx={{
-                minHeight: 48,
-                justifyContent: open ? "initial" : "center",
-                px: 2.5,
-              }}
-            >
-              <ListItemIcon
-                sx={{
-                  minWidth: 0,
-                  mr: open ? 3 : "auto",
-                  justifyContent: "center",
-                }}
-              >
-                {<Box sx={{ width: "0.9em", height: "0.9em" }} />}
-              </ListItemIcon>
-              <ListItemText
-                primary={"Users"}
-                primaryTypographyProps={{ fontSize: "0.88rem" }}
-                sx={{ opacity: open ? 1 : 0 }}
-              />
-            </ListItemButton>
-          </ListItem>
-          <ListItem key={"Product Settings"} disablePadding sx={{ display: "block" }}>
-            <ListItemButton
-              selected={selectedIndex === 17}
-              onClick={(event) => handleListItemClick(event, 17)}
-              sx={{
-                minHeight: 48,
-                justifyContent: open ? "initial" : "center",
-                px: 2.5,
-              }}
-            >
-              <ListItemIcon
-                sx={{
-                  minWidth: 0,
-                  mr: open ? 3 : "auto",
-                  justifyContent: "center",
-                }}
-              >
-                {<Box sx={{ width: "0.9em", height: "0.9em" }} />}
-              </ListItemIcon>
-              <ListItemText
-                primary={"Product Settings"}
-                primaryTypographyProps={{ fontSize: "0.88rem" }}
-                sx={{ opacity: open ? 1 : 0 }}
-              />
-            </ListItemButton>
-          </ListItem>
-          <Divider />
-          <ListItem key={"Appearance"} disablePadding sx={{ display: "block" }}>
-            <ListItemButton selected={selectedIndex === 18}>
-              <ListItemIcon
-                sx={{
-                  minWidth: 0,
-                  mr: open ? 3 : "auto",
-                  justifyContent: "center",
-                }}
-              >
-                {<FontAwesomeIcon icon={faMoon} />}
-              </ListItemIcon>
-              <ListItemText primary={"Appearance"} sx={{ opacity: open ? 1 : 0 }} />
-            </ListItemButton>
-          </ListItem>
-          <ListItem key={"Dark Mode Switch"} disablePadding sx={{ display: "block" }}>
-            <ListItemButton
-              sx={{
-                minHeight: 48,
-                justifyContent: open ? "initial" : "center",
-                px: 2.5,
-              }}
-            >
-              <ListItemIcon
-                sx={{
-                  minWidth: 0,
-                  mr: open ? 3 : "auto",
-                  justifyContent: "center",
-                }}
-              >
-                {<Box sx={{ width: "0.9em", height: "0.9em" }} />}
-              </ListItemIcon>
-              <Box>
-                <DarkModeSwitch handleThemeChange={colorMode.toggleColorMode} />
-              </Box>
-            </ListItemButton>
-          </ListItem>
-          <Divider />
-          <ListItem key={"Offer"} disablePadding sx={{ display: "block" }}>
-            <ListItemButton
-              selected={selectedIndex === 19}
-              onClick={(event) => handleListItemClick(event, 19)}
-              sx={{
-                minHeight: 48,
-                justifyContent: open ? "initial" : "center",
-                px: 2.5,
-              }}
-            >
-              <ListItemIcon
-                sx={{
-                  minWidth: 0,
-                  mr: open ? 3 : "auto",
-                  justifyContent: "center",
-                }}
-              >
-                {<FontAwesomeIcon icon={faCalendarCheck} />}
-              </ListItemIcon>
-              <ListItemText primary={"Offer"} sx={{ opacity: open ? 1 : 0 }} />
-            </ListItemButton>
-          </ListItem>
+                <ListItemButton
+                  selected={selectedIndex === item.selectedIndex}
+                  onClick={(event) => handleListItemClick(event, item.selectedIndex)}
+                  sx={{
+                    minHeight: 48,
+                    justifyContent: open ? "initial" : "center",
+                    px: 2.5,
+                  }}
+                >
+                  <ListItemIcon
+                    sx={{
+                      minWidth: 0,
+                      mr: open ? 3 : "auto",
+                      justifyContent: "center",
+                    }}
+                  >
+                    {item.icon}
+                  </ListItemIcon>
+                  {item.key === "darkModeSwitch" && open ? (
+                    <Box>
+                      <DarkModeSwitch handleThemeChange={colorMode.toggleColorMode} />
+                    </Box>
+                  ) : (
+                    <ListItemText
+                      primary={item.displayName}
+                      sx={{ opacity: open ? 1 : 0 }}
+                      primaryTypographyProps={item.primaryTypographyProps || {}}
+                    />
+                  )}
+                </ListItemButton>
+              </ListItem>
+            </React.Fragment>
+          ))}
         </List>
+
         <Divider />
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
