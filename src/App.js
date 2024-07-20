@@ -34,10 +34,26 @@ function App() {
           <CssBaseline />
           <Routes>
             <Route element={<ProtectedRoutes />}>
-              <Route element={<MainLayout />} > 
+              <Route element={<MainLayout />}>
                 <Route path="/" element={<Dashboard />} />
                 <Route path="/issues" element={<Issues />} />
-                <Route path="/blank" element={<BlankPage />} />
+                <Route path="/projects" element={<BlankPage />} />
+                <Route path="/map" element={<BlankPage />} />
+                <Route path="/planning" element={<BlankPage />} />
+                <Route path="/gantt-chart" element={<BlankPage />} />
+                <Route path="/calendar" element={<BlankPage />} />
+                <Route path="/checklists" element={<BlankPage />} />
+                <Route path="/checklists-child" element={<BlankPage />} />
+                <Route path="/create-checklists" element={<BlankPage />} />
+                <Route path="/resources" element={<BlankPage />} />
+                <Route path="/teams" element={<BlankPage />} />
+                <Route path="/employees" element={<BlankPage />} />
+                <Route path="/settings" element={<BlankPage />} />
+                <Route path="/partner-settings" element={<BlankPage />} />
+                <Route path="/email-settings" element={<BlankPage />} />
+                <Route path="/users" element={<BlankPage />} />
+                <Route path="/product-settings" element={<BlankPage />} />
+                <Route path="/offer" element={<BlankPage />} />
               </Route>
             </Route>
 
