@@ -28,19 +28,42 @@ const Issues = () => {
     electrical: false,
     hub: false,
   });
-  const theme = useTheme();
-
+  
+  const [assignedUsers, setAssignedUsers] = useState([]);
+  const [lastUpdatedOn, setLastUpdatedOn] = useState(false);
+  
   const [inputErrors, setInputErrors] = useState({});
   const [assignContactInputErrors, setAssignContactInputErrors] = useState({});
-
   const [selectedUser, setSelectedUser] = useState("");
   const [selectedRole, setSelectedRole] = useState("");
-
-  const navigate = useNavigate();
-
   const [userOptions, setUserOptions] = useState(dataTransformer(userData));
-  const [assignedUsers, setAssignedUsers] = useState([]);
-  const [lastUpdatedOn, setLastUpdatedOn] = useState(moment());
+  
+  const theme = useTheme();
+  const navigate = useNavigate();
+  
+
+  useEffect(() => {
+    const savedIssue = sessionStorage.getItem('issue');
+    const savedAssignedUsers = sessionStorage.getItem('assignedUsers');
+    const savedLastUpdatedOn = sessionStorage.getItem('lastUpdatedOn');
+
+    if (savedIssue) setIssue(JSON.parse(savedIssue));
+    if (savedAssignedUsers) setAssignedUsers(JSON.parse(savedAssignedUsers));
+    if (savedLastUpdatedOn) setLastUpdatedOn(moment(savedLastUpdatedOn));
+  }, []);
+
+  const saveDataToSessionStorage = () => {
+    sessionStorage.setItem('issue', JSON.stringify(issue));
+    sessionStorage.setItem('assignedUsers', JSON.stringify(assignedUsers));
+    sessionStorage.setItem('lastUpdatedOn', moment().toISOString());
+    //NOTE: 👆 The reason moment object is created in here instead of getting the value from the state is because the value in state might not have been updated yet, because React underlyingly batches setState() calls, and it is not updated synchronously.
+  };
+  
+  const clearDataFromSessionStorage = () => {
+    sessionStorage.removeItem('issue');
+    sessionStorage.removeItem('assignedUsers');
+    sessionStorage.removeItem('lastUpdatedOn');
+  };
 
   const handleCreateIssueInputChange = (e) => {
     console.log(e);
@@ -129,12 +152,11 @@ const Issues = () => {
   };
 
   const handleSaveChanges = () => {
-    debugger;
-    setLastUpdatedOn(moment());
-    console.log("Current changes - Not saved yet:", issue);
     let isValid = validateCreateIssue();
-
+    
     if (isValid) {
+      setLastUpdatedOn(moment());
+      saveDataToSessionStorage();
       console.log("Current changes - Saved:", issue);
     }
   };
@@ -147,6 +169,7 @@ const Issues = () => {
             variant="outlined"
             onClick={() => {
               if (logout()) {
+                clearDataFromSessionStorage();
                 navigate("/login");
               }
             }}

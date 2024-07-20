@@ -236,6 +236,10 @@ function Login() {
                 control={
                   <Checkbox
                     checked={keepLoggedIn}
+                    sx={{
+                      marginLeft: '0.5rem',
+                      transform: 'Scale(1.75)',
+                    }}
                     onChange={(e) => setKeepLoggedIn(e.target.checked)}
                   />
                 }

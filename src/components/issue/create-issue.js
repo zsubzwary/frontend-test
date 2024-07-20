@@ -33,9 +33,13 @@ export default function CreateIssue({
       <Typography variant="h4" gutterBottom>
         Create an Issue
       </Typography>
-      <Typography variant="h5" gutterBottom>
-        Last updated on {lastUpdatedOn.format("DD.MM.YYYY hh:mm a")}
-      </Typography>
+      {lastUpdatedOn ? (
+        <Typography variant="h5" gutterBottom>
+          Last updated on {lastUpdatedOn.format("DD.MM.YYYY hh:mm a")}
+        </Typography>
+      ) : (
+        ""
+      )}
 
       <Box
         sx={{
