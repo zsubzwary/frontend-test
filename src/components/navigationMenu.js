@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useContext } from "react";
 import { styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import MuiDrawer from "@mui/material/Drawer";
@@ -32,6 +32,8 @@ import {
   faUsers,
 } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
+import { ColorModeContext } from "../App";
+import DarkModeSwitch from "../components/common/DarkModeSwitch";
 
 const drawerWidth = 240;
 
@@ -102,15 +104,21 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== "open" 
 
 export default function NavigationMenu() {
   const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(true);
   const navigate = useNavigate();
+  const colorMode = useContext(ColorModeContext);
+  const [selectedIndex, setSelectedIndex] = React.useState(1);
+
+  const handleListItemClick = (event, index) => {
+    setSelectedIndex(index);
+  };
 
   const handleDrawerOpen = () => {
     setOpen(true);
   };
 
   const handleDrawerClose = () => {
-    setOpen(false);
+    setOpen(true);
   };
 
   return (
@@ -130,6 +138,8 @@ export default function NavigationMenu() {
         <List style={{ marginTop: "1rem" }}>
           <ListItem key={"Dashboard"} disablePadding sx={{ display: "block" }}>
             <ListItemButton
+              selected={selectedIndex === 0}
+              onClick={(event) => handleListItemClick(event, 0)}
               sx={{
                 minHeight: 48,
                 justifyContent: open ? "initial" : "center",
@@ -150,6 +160,8 @@ export default function NavigationMenu() {
           </ListItem>
           <ListItem key={"Projects"} disablePadding sx={{ display: "block" }}>
             <ListItemButton
+              selected={selectedIndex === 1}
+              onClick={(event) => handleListItemClick(event, 1)}
               sx={{
                 minHeight: 48,
                 justifyContent: open ? "initial" : "center",
@@ -175,6 +187,8 @@ export default function NavigationMenu() {
             sx={{ display: "block" }}
           >
             <ListItemButton
+              selected={selectedIndex === 2}
+              onClick={(event) => handleListItemClick(event, 2)}
               sx={{
                 minHeight: 48,
                 justifyContent: open ? "initial" : "center",
@@ -195,6 +209,8 @@ export default function NavigationMenu() {
           </ListItem>
           <ListItem key={"Map"} disablePadding sx={{ display: "block" }}>
             <ListItemButton
+              selected={selectedIndex === 3}
+              onClick={(event) => handleListItemClick(event, 3)}
               sx={{
                 minHeight: 48,
                 justifyContent: open ? "initial" : "center",
@@ -208,7 +224,7 @@ export default function NavigationMenu() {
                   justifyContent: "center",
                 }}
               >
-                {<FontAwesomeIcon icon={faMap} />}
+                <FontAwesomeIcon icon={faMap} />
               </ListItemIcon>
               <ListItemText primary={"Map"} sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
@@ -216,6 +232,8 @@ export default function NavigationMenu() {
           <Divider />
           <ListItem key={"Planing"} disablePadding sx={{ display: "block" }}>
             <ListItemButton
+              selected={selectedIndex === 4}
+              onClick={(event) => handleListItemClick(event, 4)}
               sx={{
                 minHeight: 48,
                 justifyContent: open ? "initial" : "center",
@@ -231,12 +249,14 @@ export default function NavigationMenu() {
               >
                 {<FontAwesomeIcon icon={faCalendarCheck} />}
               </ListItemIcon>
-              <ListItemText primary={"Planing"} sx={{ opacity: open ? 1 : 0 }} />
+              <ListItemText primary={"Planning"} sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
           </ListItem>
 
           <ListItem key={"Gantt Chart"} disablePadding sx={{ display: "block" }}>
             <ListItemButton
+              selected={selectedIndex === 5}
+              onClick={(event) => handleListItemClick(event, 5)}
               sx={{
                 minHeight: 48,
                 justifyContent: open ? "initial" : "center",
@@ -256,11 +276,17 @@ export default function NavigationMenu() {
                   /> /* { <FontAwesomeIcon style={{ visibility: "hidden" }} icon={faCog} />} */
                 }
               </ListItemIcon>
-              <ListItemText primary={"Gantt Chart"} sx={{ opacity: open ? 1 : 0 }} />
+              <ListItemText
+                primary={"Gantt Chart"}
+                primaryTypographyProps={{ fontSize: "0.88rem" }}
+                sx={{ opacity: open ? 1 : 0, fontSize: "6px !important" }}
+              />
             </ListItemButton>
           </ListItem>
           <ListItem key={"Calendar"} disablePadding sx={{ display: "block" }}>
             <ListItemButton
+              selected={selectedIndex === 6}
+              onClick={(event) => handleListItemClick(event, 6)}
               sx={{
                 minHeight: 48,
                 justifyContent: open ? "initial" : "center",
@@ -276,12 +302,18 @@ export default function NavigationMenu() {
               >
                 {<Box sx={{ width: "0.9em", height: "0.9em" }} />}
               </ListItemIcon>
-              <ListItemText primary={"Calendar"} sx={{ opacity: open ? 1 : 0 }} />
+              <ListItemText
+                primary={"Calendar"}
+                primaryTypographyProps={{ fontSize: "0.88rem" }}
+                sx={{ opacity: open ? 1 : 0 }}
+              />
             </ListItemButton>
           </ListItem>
           <Divider />
           <ListItem key={"Checklists"} disablePadding sx={{ display: "block" }}>
             <ListItemButton
+              selected={selectedIndex === 7}
+              onClick={(event) => handleListItemClick(event, 7)}
               sx={{
                 minHeight: 48,
                 justifyContent: open ? "initial" : "center",
@@ -302,6 +334,8 @@ export default function NavigationMenu() {
           </ListItem>
           <ListItem key={"ChecklistsChild"} disablePadding sx={{ display: "block" }}>
             <ListItemButton
+              selected={selectedIndex === 8}
+              onClick={(event) => handleListItemClick(event, 8)}
               sx={{
                 minHeight: 48,
                 justifyContent: open ? "initial" : "center",
@@ -317,11 +351,17 @@ export default function NavigationMenu() {
               >
                 {<Box sx={{ width: "0.9em", height: "0.9em" }} />}
               </ListItemIcon>
-              <ListItemText primary={"Checklists"} sx={{ opacity: open ? 1 : 0 }} />
+              <ListItemText
+                primary={"Checklists"}
+                primaryTypographyProps={{ fontSize: "0.88rem" }}
+                sx={{ opacity: open ? 1 : 0 }}
+              />
             </ListItemButton>
           </ListItem>
           <ListItem key={"Create Checklists"} disablePadding sx={{ display: "block" }}>
             <ListItemButton
+              selected={selectedIndex === 9}
+              onClick={(event) => handleListItemClick(event, 9)}
               sx={{
                 minHeight: 48,
                 justifyContent: open ? "initial" : "center",
@@ -337,12 +377,18 @@ export default function NavigationMenu() {
               >
                 {<Box sx={{ width: "0.9em", height: "0.9em" }} />}
               </ListItemIcon>
-              <ListItemText primary={"Create Checklists"} sx={{ opacity: open ? 1 : 0 }} />
+              <ListItemText
+                primary={"Create Checklists"}
+                primaryTypographyProps={{ fontSize: "0.88rem" }}
+                sx={{ opacity: open ? 1 : 0 }}
+              />
             </ListItemButton>
           </ListItem>
           <Divider />
           <ListItem key={"Resources"} disablePadding sx={{ display: "block" }}>
             <ListItemButton
+              selected={selectedIndex === 10}
+              onClick={(event) => handleListItemClick(event, 10)}
               sx={{
                 minHeight: 48,
                 justifyContent: open ? "initial" : "center",
@@ -363,6 +409,8 @@ export default function NavigationMenu() {
           </ListItem>
           <ListItem key={"Teams"} disablePadding sx={{ display: "block" }}>
             <ListItemButton
+              selected={selectedIndex === 11}
+              onClick={(event) => handleListItemClick(event, 11)}
               sx={{
                 minHeight: 48,
                 justifyContent: open ? "initial" : "center",
@@ -378,11 +426,17 @@ export default function NavigationMenu() {
               >
                 {<Box sx={{ width: "0.9em", height: "0.9em" }} />}
               </ListItemIcon>
-              <ListItemText primary={"Teams"} sx={{ opacity: open ? 1 : 0 }} />
+              <ListItemText
+                primary={"Teams"}
+                primaryTypographyProps={{ fontSize: "0.88rem" }}
+                sx={{ opacity: open ? 1 : 0 }}
+              />
             </ListItemButton>
           </ListItem>
           <ListItem key={"Employees"} disablePadding sx={{ display: "block" }}>
             <ListItemButton
+              selected={selectedIndex === 12}
+              onClick={(event) => handleListItemClick(event, 12)}
               sx={{
                 minHeight: 48,
                 justifyContent: open ? "initial" : "center",
@@ -398,12 +452,18 @@ export default function NavigationMenu() {
               >
                 {<Box sx={{ width: "0.9em", height: "0.9em" }} />}
               </ListItemIcon>
-              <ListItemText primary={"Employees"} sx={{ opacity: open ? 1 : 0 }} />
+              <ListItemText
+                primary={"Employees"}
+                primaryTypographyProps={{ fontSize: "0.88rem" }}
+                sx={{ opacity: open ? 1 : 0 }}
+              />
             </ListItemButton>
           </ListItem>
           <Divider />
           <ListItem key={"Settings"} disablePadding sx={{ display: "block" }}>
             <ListItemButton
+              selected={selectedIndex === 13}
+              onClick={(event) => handleListItemClick(event, 13)}
               sx={{
                 minHeight: 48,
                 justifyContent: open ? "initial" : "center",
@@ -424,6 +484,8 @@ export default function NavigationMenu() {
           </ListItem>
           <ListItem key={"Partner Settings"} disablePadding sx={{ display: "block" }}>
             <ListItemButton
+              selected={selectedIndex === 14}
+              onClick={(event) => handleListItemClick(event, 14)}
               sx={{
                 minHeight: 48,
                 justifyContent: open ? "initial" : "center",
@@ -439,11 +501,17 @@ export default function NavigationMenu() {
               >
                 {<Box sx={{ width: "0.9em", height: "0.9em" }} />}
               </ListItemIcon>
-              <ListItemText primary={"Partner Settings"} sx={{ opacity: open ? 1 : 0 }} />
+              <ListItemText
+                primary={"Partner Settings"}
+                primaryTypographyProps={{ fontSize: "0.88rem" }}
+                sx={{ opacity: open ? 1 : 0 }}
+              />
             </ListItemButton>
           </ListItem>
           <ListItem key={"Email Settings"} disablePadding sx={{ display: "block" }}>
             <ListItemButton
+              selected={selectedIndex === 15}
+              onClick={(event) => handleListItemClick(event, 15)}
               sx={{
                 minHeight: 48,
                 justifyContent: open ? "initial" : "center",
@@ -459,11 +527,17 @@ export default function NavigationMenu() {
               >
                 {<Box sx={{ width: "0.9em", height: "0.9em" }} />}
               </ListItemIcon>
-              <ListItemText primary={"Email Settings"} sx={{ opacity: open ? 1 : 0 }} />
+              <ListItemText
+                primary={"Email Settings"}
+                primaryTypographyProps={{ fontSize: "0.88rem" }}
+                sx={{ opacity: open ? 1 : 0 }}
+              />
             </ListItemButton>
           </ListItem>
           <ListItem key={"Users"} disablePadding sx={{ display: "block" }}>
             <ListItemButton
+              selected={selectedIndex === 16}
+              onClick={(event) => handleListItemClick(event, 16)}
               sx={{
                 minHeight: 48,
                 justifyContent: open ? "initial" : "center",
@@ -479,11 +553,17 @@ export default function NavigationMenu() {
               >
                 {<Box sx={{ width: "0.9em", height: "0.9em" }} />}
               </ListItemIcon>
-              <ListItemText primary={"Users"} sx={{ opacity: open ? 1 : 0 }} />
+              <ListItemText
+                primary={"Users"}
+                primaryTypographyProps={{ fontSize: "0.88rem" }}
+                sx={{ opacity: open ? 1 : 0 }}
+              />
             </ListItemButton>
           </ListItem>
           <ListItem key={"Product Settings"} disablePadding sx={{ display: "block" }}>
             <ListItemButton
+              selected={selectedIndex === 17}
+              onClick={(event) => handleListItemClick(event, 17)}
               sx={{
                 minHeight: 48,
                 justifyContent: open ? "initial" : "center",
@@ -499,18 +579,16 @@ export default function NavigationMenu() {
               >
                 {<Box sx={{ width: "0.9em", height: "0.9em" }} />}
               </ListItemIcon>
-              <ListItemText primary={"Product Settings"} sx={{ opacity: open ? 1 : 0 }} />
+              <ListItemText
+                primary={"Product Settings"}
+                primaryTypographyProps={{ fontSize: "0.88rem" }}
+                sx={{ opacity: open ? 1 : 0 }}
+              />
             </ListItemButton>
           </ListItem>
           <Divider />
           <ListItem key={"Appearance"} disablePadding sx={{ display: "block" }}>
-            <ListItemButton
-              sx={{
-                minHeight: 48,
-                justifyContent: open ? "initial" : "center",
-                px: 2.5,
-              }}
-            >
+            <ListItemButton selected={selectedIndex === 18}>
               <ListItemIcon
                 sx={{
                   minWidth: 0,
@@ -523,9 +601,33 @@ export default function NavigationMenu() {
               <ListItemText primary={"Appearance"} sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
           </ListItem>
+          <ListItem key={"Dark Mode Switch"} disablePadding sx={{ display: "block" }}>
+            <ListItemButton
+              sx={{
+                minHeight: 48,
+                justifyContent: open ? "initial" : "center",
+                px: 2.5,
+              }}
+            >
+              <ListItemIcon
+                sx={{
+                  minWidth: 0,
+                  mr: open ? 3 : "auto",
+                  justifyContent: "center",
+                }}
+              >
+                {<Box sx={{ width: "0.9em", height: "0.9em" }} />}
+              </ListItemIcon>
+              <Box>
+                <DarkModeSwitch handleThemeChange={colorMode.toggleColorMode} />
+              </Box>
+            </ListItemButton>
+          </ListItem>
           <Divider />
           <ListItem key={"Offer"} disablePadding sx={{ display: "block" }}>
             <ListItemButton
+              selected={selectedIndex === 19}
+              onClick={(event) => handleListItemClick(event, 19)}
               sx={{
                 minHeight: 48,
                 justifyContent: open ? "initial" : "center",
