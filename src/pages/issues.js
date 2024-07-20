@@ -1,17 +1,6 @@
 // Issues.js
 import React, { useEffect, useState } from "react";
-import {
-  Container,
-  Select,
-  MenuItem,
-  Button,
-  FormControl,
-  InputLabel,
-  Typography,
-  Box,
-  FormHelperText,
-  useTheme,
-} from "@mui/material";
+import { Container, Button, Box, useTheme } from "@mui/material";
 import {
   priorityOptions,
   dcSwitchStatusOptions,
@@ -25,6 +14,7 @@ import moment from "moment";
 import IssueContactDataGrid from "../components/data-grid/issue-contact-data-grid";
 import { showSnackbar } from "../events/snackBarEmitter";
 import CreateIssue from "../components/issue/create-issue";
+import AssignIssueContact from "../components/issue/create-issue-contact";
 
 const Issues = () => {
   const [issue, setIssue] = useState({
@@ -188,61 +178,16 @@ const Issues = () => {
 
           <Box sx={{ paddingTop: "2rem" }}></Box>
 
-          <Typography variant="h4" gutterBottom>
-            Issue Contact
-          </Typography>
-
-          <Box sx={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: 3 }}>
-            <FormControl
-              sx={{ gridColumn: "span 2" }}
-              fullWidth
-              margin="normal"
-              error={!!assignContactInputErrors.role}
-            >
-              <InputLabel shrink>Select Role</InputLabel>
-              <Select
-                notched
-                label="Select Role"
-                name="role"
-                value={issue.role}
-                onChange={handleRoleChange}
-              >
-                {roleOptions.map((option) => (
-                  <MenuItem key={option.value} value={option.value}>
-                    {option.label}
-                  </MenuItem>
-                ))}
-              </Select>
-              <FormHelperText>{assignContactInputErrors.role}</FormHelperText>
-            </FormControl>
-            <FormControl
-              sx={{ gridColumn: "span 2" }}
-              fullWidth
-              margin="normal"
-              error={!!assignContactInputErrors.user}
-            >
-              <InputLabel shrink>Select User</InputLabel>
-              <Select
-                notched
-                label="Select User"
-                name="user"
-                value={issue.user}
-                onChange={handleUserChange}
-              >
-                {userOptions.map((option) => (
-                  <MenuItem key={option.value} value={option.value}>
-                    {option.label}
-                  </MenuItem>
-                ))}
-              </Select>
-              <FormHelperText>{assignContactInputErrors.user}</FormHelperText>
-            </FormControl>
-
-            <FormControl fullWidth margin="normal">
-              <Button variant="contained" color="primary" onClick={handleAssignUser}>
-                Assign
-              </Button>
-            </FormControl>
+          <Box>
+            <AssignIssueContact
+              assignContactInputErrors={assignContactInputErrors}
+              handleRoleChange={handleRoleChange}
+              handleUserChange={handleUserChange}
+              handleAssignUser={handleAssignUser}
+              roleOptions={roleOptions}
+              userOptions={userOptions}
+              issue={issue}
+            />
           </Box>
 
           <Box style={{ paddingTop: "2rem" }}>
