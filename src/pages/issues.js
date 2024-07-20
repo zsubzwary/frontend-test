@@ -287,7 +287,7 @@ const Issues = () => {
         </Box>
       </form>
       <Box style={{ paddingTop: "2rem", paddingBottom: "2rem" }}>
-      <IssueContactDataGrid userData={assignedUsers} onDeleteClick={handleRemoveUser} />
+        <IssueContactDataGrid userData={assignedUsers} onDeleteClick={handleRemoveUser} />
       </Box>
       <div className="action-buttons">
         <Button variant="contained" color="primary" onClick={() => handleSaveChanges()}>
