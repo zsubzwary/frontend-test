@@ -14,7 +14,11 @@ const GlobalSnackbar = () => {
     setSnackbar({ open: true, message, duration });
   });
 
-  const handleClose = () => {
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
     setSnackbar({ open: false, message: "", duration: 5000 });
   };
 
