@@ -33,6 +33,13 @@ export const isUserLoggedIn = () => {
   }
 };
 
+/**
+ * Transforms input data into a new format with 'value' and 'label' properties.
+ * Primary use-case is for react-select
+ *
+ * @param {Array} data - The input data array to be transformed.
+ * @return {Array} The transformed data array with 'value' and 'label' properties.
+ */
 export const dataTransformer = (data) => {
   return data.map((item) => {
     return {
