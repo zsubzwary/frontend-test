@@ -11,14 +11,19 @@ export const LightTheme = {
   components: {
     MuiButton: {
       styleOverrides: {
-        root: {
+        contained: {
           background: "radial-gradient(84.88% 84.88% at 50% 15.12%, #E7463F 0%, #EF8439 100%)",
           border: 0,
           borderRadius: 30,
           boxShadow: "0 3px 5px 2px rgba(255, 105, 135, .3)",
           color: "white",
           height: 48,
-          padding: "0 30px",
+          padding: "0 15px",
+          fontWeight: 700,
+        },
+        outlined: {
+          border: '1px solid #E9513E',
+          borderRadius: 30,
           fontWeight: 700,
         },
       },
@@ -48,7 +53,12 @@ export const LightTheme = {
     borderRadius: 4,
   },
   typography: {
-    fontSize: 16,
+    fontSize: '1rem',
     fontWeightRegular: 400,
+      h4: {
+        fontSize: '1.13rem',
+        fontWeight: 600,
+        color: '#E9513E',
+      }
   },
 };
