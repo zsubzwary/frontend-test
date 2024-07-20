@@ -5,8 +5,14 @@ import IconButton from "@mui/material/IconButton";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-export default function IssueContactDataGrid({ userData, onDeleteClick }) {
+export default function IssueContactDataGrid({ userData, onDeleteClick, onBulkDeleteClick }) {
   const DEFAULT_ROWS_PER_PAGE = 2;
+
+
+  const initialRows = userData ?? [];
+
+  const [rows, setRows] = React.useState(initialRows);
+  const [selectedRows, setSelectedRows] = React.useState([]);
 
   const columns = [
     {
@@ -36,7 +42,11 @@ export default function IssueContactDataGrid({ userData, onDeleteClick }) {
     },
     {
       field: null,
-      headerName: null,
+      headerName: selectedRows.length > 1 ? (
+        <IconButton aria-label="delete" onClick={() => onBulkDeleteClick(selectedRows)} >
+          <FontAwesomeIcon size="xs" color="red" icon={faTrash} />
+        </IconButton>
+      ) : '',
       flex: 1,
       sortable: false,
       renderCell: (params) => (
@@ -47,13 +57,14 @@ export default function IssueContactDataGrid({ userData, onDeleteClick }) {
     },
   ];
 
-  const initialRows = userData ?? [];
-
-  const [rows, setRows] = React.useState(initialRows);
 
   React.useEffect(() => {
     setRows(userData);
   }, [userData]);
+
+  const handleRowSelection = (ids) => {
+    setSelectedRows(ids);
+  };
 
   const handleDeleteClick = (id) => {
     onDeleteClick(id);
@@ -76,6 +87,10 @@ export default function IssueContactDataGrid({ userData, onDeleteClick }) {
         disableRowSelectionOnClick
         disableColumnMenu
         pageSizeOptions={[DEFAULT_ROWS_PER_PAGE, 5, 10]}
+        onRowSelectionModelChange={(selectionModel) => {
+          handleRowSelection(selectionModel);
+          console.log(selectionModel);
+        }}
       />
     </Box>
   );
