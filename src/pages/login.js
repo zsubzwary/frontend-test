@@ -157,7 +157,7 @@ function Login() {
   // Responsive UI Wrappers End
 
   return (
-    <Box fullWidth bgcolor="#FAFBFA">
+    <Box fullWidth>
       <Container style={{ height: "100vh" }} maxWidth="xl">
         <Box display="flex" justifyItems={"center"} justifyContent={"center"} height="100%" gap={4}>
           {/* Left Side of The Page Start */}
