@@ -11,10 +11,10 @@ import {
 import { dataTransformer, logout } from "../util/helper";
 import { useNavigate } from "react-router-dom";
 import moment from "moment";
-import IssueContactDataGrid from "../components/data-grid/issue-contact-data-grid";
+import IssueContactDataGrid from "../components/issue/IssueContactDataGrid";
 import { showSnackbar } from "../events/snackBarEmitter";
-import CreateIssue from "../components/issue/create-issue";
-import AssignIssueContact from "../components/issue/create-issue-contact";
+import CreateIssue from "../components/issue/CreateIssue";
+import AssignIssueContact from "../components/issue/AssignIssueContact";
 
 const Issues = () => {
   const [issue, setIssue] = useState({
