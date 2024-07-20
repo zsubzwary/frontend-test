@@ -13,8 +13,43 @@ export const LightTheme = {
     },
   },
   components: {
+    MuiPaper: {
+      styleOverrides: {
+        root: {
+          backgroundColor: 'white',
+          boxShadow: 'none'
+        }
+      }
+    },
+    MuiToolbar: {
+      styleOverrides: {
+        root: {
+          backgroundColor: 'white',
+          border: 0,
+        }
+      }
+    },
+    MuiCssBaseline: {
+      styleOverrides: {
+        html: {
+          '*::-webkit-scrollbar': {
+            width: '0.2em',
+          },
+          '*::-webkit-scrollbar-track': {
+            // '-webkit-box-shadow': 'inset 0 0 6px rgba(0,0,0,0.',
+          },
+          '*::-webkit-scrollbar-thumb': {
+            backgroundColor: 'rgba(0,0,0,.4)',
+            outline: '1px solid slategrey',
+          },
+        },
+      },
+    },
     MuiButton: {
       styleOverrides: {
+        root: {
+          textTransform: 'none'
+        },
         contained: {
           background: "radial-gradient(84.88% 84.88% at 50% 15.12%, #E7463F 0%, #EF8439 100%)",
           border: 0,
