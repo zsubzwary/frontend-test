@@ -33,7 +33,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import { ColorModeContext } from "../App";
-import DarkModeSwitch from "../components/common/DarkModeSwitch";
+import DarkModeSwitch from "./common/DarkModeSwitch";
 
 const drawerWidth = 240;
 

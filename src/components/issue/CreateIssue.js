@@ -12,7 +12,7 @@ import {
   InputAdornment,
   FormHelperText,
 } from "@mui/material";
-import { priorityOptions, dcSwitchStatusOptions, statusOptions } from "../../util/mockData";
+import { priorityOptions, dcSwitchStatusOptions, statusOptions } from "../../util/MockData";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendar } from "@fortawesome/free-solid-svg-icons";
 import moment from "moment";

@@ -15,7 +15,7 @@ import { Visibility, VisibilityOff, PersonOutline, LockOutlined } from "@mui/ico
 import { ReactComponent as EyeIcon } from "../assets/eye.svg";
 import { ReactComponent as LoginSVG } from "../assets/login.svg";
 import { ReactComponent as Logo } from "../assets/logo.svg";
-import { isUserLoggedIn } from "../util/helper";
+import { isUserLoggedIn } from "../util/Helper";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash, faLock, faUser } from "@fortawesome/free-solid-svg-icons";
 import { styled } from "@mui/material/styles";

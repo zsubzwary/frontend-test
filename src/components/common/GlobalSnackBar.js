@@ -1,7 +1,7 @@
 // GlobalSnackbar.js
 import React, { useState } from "react";
 import Snackbar from "@mui/material/Snackbar";
-import { useSnackbarEmitter } from "../../events/snackBarEmitter";
+import { useSnackbarEmitter } from "../../events/SnackBarEmitter";
 
 const GlobalSnackbar = () => {
   const [snackbar, setSnackbar] = useState({

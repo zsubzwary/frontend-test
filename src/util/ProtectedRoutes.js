@@ -1,5 +1,5 @@
 import { Navigate, Outlet } from 'react-router-dom';
-import { isUserLoggedIn } from './helper';
+import { isUserLoggedIn } from './Helper';
 
 /**
  * Function to handle protected routes based on user authentication status.

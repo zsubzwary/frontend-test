@@ -7,12 +7,12 @@ import {
   statusOptions,
   roleOptions,
   userData,
-} from "../util/mockData";
-import { dataTransformer, logout } from "../util/helper";
+} from "../util/MockData";
+import { dataTransformer, logout } from "../util/Helper";
 import { useNavigate } from "react-router-dom";
 import moment from "moment";
 import IssueContactDataGrid from "../components/issue/IssueContactDataGrid";
-import { showSnackbar } from "../events/snackBarEmitter";
+import { showSnackbar } from "../events/SnackBarEmitter";
 import CreateIssue from "../components/issue/CreateIssue";
 import AssignIssueContact from "../components/issue/AssignIssueContact";
 

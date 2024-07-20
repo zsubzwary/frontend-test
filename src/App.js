@@ -1,16 +1,16 @@
 import React, { useState, useMemo } from "react";
 import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
-import Login from "./pages/login";
-import Dashboard from "./pages/dashboard";
+import Login from "./pages/Login";
+import Dashboard from "./pages/Dashboard";
 // import Issues from './Issues';
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { ProtectedRoutes } from "./util/ProtectedRoutes";
-import Issues from "./pages/issues";
+import Issues from "./pages/Issues";
 import { LightTheme } from "./themes/Light";
 import { DarkTheme } from "./themes/Dark";
 import { createTheme } from "@mui/material";
 import MainLayout from "./components/layout/MainLayout";
-import BlankPage from "./pages/blank";
+import BlankPage from "./pages/Blank";
 
 export const ColorModeContext = React.createContext({ toggleColorMode: () => {} });
 
