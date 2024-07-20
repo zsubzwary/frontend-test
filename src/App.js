@@ -3,12 +3,17 @@ import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-d
 import Login from "./pages/login";
 import Dashboard from './pages/dashboard';
 // import Issues from './Issues';
-import { CssBaseline } from "@mui/material";
+import { CssBaseline, ThemeProvider } from "@mui/material";
 import { ProtectedRoutes } from "./util/ProtectedRoutes";
 import Issues from "./pages/issues";
+import { DefaultTheme } from "./themes/default";
+import {createTheme} from "@mui/material";
+
+const theme = createTheme(DefaultTheme);
 
 function App() {
   return (
+    <ThemeProvider theme={theme}>
     <Router>
       <CssBaseline />
       <Routes>
@@ -20,6 +25,7 @@ function App() {
           <Route path="/login" element={<Login />} />
       </Routes>
     </Router>
+    </ThemeProvider>
   );
 }
 
