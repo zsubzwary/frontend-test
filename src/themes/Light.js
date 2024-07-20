@@ -7,6 +7,10 @@ export const LightTheme = {
     secondary: {
       main: "#f50057",
     },
+    background: {
+      default: '#F7F8FA',
+      customBox: '#ffffff',
+    },
   },
   components: {
     MuiButton: {
@@ -48,6 +52,13 @@ export const LightTheme = {
         },
       },
     },
+    MuiFormHelperText: {
+      styleOverrides: {
+        root: {
+          fontSize: '0.75rem', // Adjust the font size as needed
+        },
+      },
+    },
   },
   shape: {
     borderRadius: 4,
@@ -59,6 +70,10 @@ export const LightTheme = {
         fontSize: '1.13rem',
         fontWeight: 600,
         color: '#E9513E',
+      },
+      h5: {
+        fontSize: '0.88rem',
+        color: '#898787',
       }
   },
 };

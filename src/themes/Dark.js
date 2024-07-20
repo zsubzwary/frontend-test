@@ -7,6 +7,10 @@ export const DarkTheme = {
     secondary: {
       main: "#f50057",
     },
+    background: {
+      default: '#000000',
+      customBox: '#292C26'
+    },
   },
   components: {
     MuiButton: {
@@ -48,12 +52,28 @@ export const DarkTheme = {
         },
       },
     },
+    MuiFormHelperText: {
+      styleOverrides: {
+        root: {
+          fontSize: '0.75rem', // Adjust the font size as needed
+        },
+      },
+    },
   },
   shape: {
     borderRadius: 4,
   },
   typography: {
-    fontSize: 16,
+    fontSize: '1rem',
     fontWeightRegular: 400,
+      h4: {
+        fontSize: '1.13rem',
+        fontWeight: 600,
+        color: '#E9513E',
+      },
+      h5: {
+        fontSize: '0.88rem',
+        color: '#898787',
+      }
   },
 };
