@@ -111,6 +111,15 @@ export default function NavigationMenu() {
 
   const handleListItemClick = (event, index) => {
     setSelectedIndex(index);
+    if (index === 0) {
+      navigate('/');
+    }
+    else if(index === 2) {
+      navigate('/issues');
+    }
+    else  {
+      navigate('/blank');
+    }
   };
 
   const handleDrawerOpen = () => {

@@ -9,6 +9,8 @@ import Issues from "./pages/issues";
 import { LightTheme } from "./themes/Light";
 import { DarkTheme } from "./themes/Dark";
 import { createTheme } from "@mui/material";
+import MainLayout from "./components/layout/MainLayout";
+import BlankPage from "./pages/blank";
 
 export const ColorModeContext = React.createContext({ toggleColorMode: () => {} });
 
@@ -32,8 +34,11 @@ function App() {
           <CssBaseline />
           <Routes>
             <Route element={<ProtectedRoutes />}>
-              <Route path="/" element={<Dashboard />} />
-              <Route path="/issues" element={<Issues />} />
+              <Route element={<MainLayout />} > 
+                <Route path="/" element={<Dashboard />} />
+                <Route path="/issues" element={<Issues />} />
+                <Route path="/blank" element={<BlankPage />} />
+              </Route>
             </Route>
 
             <Route path="/login" element={<Login />} />
