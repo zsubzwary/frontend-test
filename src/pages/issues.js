@@ -29,7 +29,6 @@ import IssueContactDataGrid from "../components/data-grid/issue-contact-data-gri
 // import "../css/issue-page.css"; // Import CSS for custom styling
 
 const Issues = () => {
-  const DEFAULT_ROWS_PER_PAGE = 2;
   const [issue, setIssue] = useState({
     title: "",
     priority: "",
@@ -49,10 +48,7 @@ const Issues = () => {
 
   const [userOptions, setUserOptions] = useState(dataTransformer(userData));
   const [assignedUsers, setAssignedUsers] = useState([]);
-  const [currentPage, setCurrentPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(DEFAULT_ROWS_PER_PAGE);
   const [lastUpdatedOn, setLastUpdatedOn] = useState(moment());
-  const totalPages = Math.ceil(assignedUsers.length / rowsPerPage);
 
   const handleCreateIssueInputChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -100,15 +96,6 @@ const Issues = () => {
 
   const handleRemoveUser = (id) => {
     setAssignedUsers(assignedUsers.filter((user) => user.id !== id));
-  };
-
-  const handlePageChange = (event, value) => {
-    setCurrentPage(value);
-  };
-
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, DEFAULT_ROWS_PER_PAGE));
-    setCurrentPage(0);
   };
 
   const handleSaveChanges = () => {

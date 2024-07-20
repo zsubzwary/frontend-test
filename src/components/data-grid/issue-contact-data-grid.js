@@ -6,6 +6,8 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function IssueContactDataGrid({ userData, onDeleteClick }) {
+  const DEFAULT_ROWS_PER_PAGE = 2;
+
   const columns = [
     {
       field: "name",
@@ -66,14 +68,14 @@ export default function IssueContactDataGrid({ userData, onDeleteClick }) {
         initialState={{
           pagination: {
             paginationModel: {
-              pageSize: 2,
+              pageSize: DEFAULT_ROWS_PER_PAGE,
             },
           },
         }}
         checkboxSelection
         disableRowSelectionOnClick
         disableColumnMenu
-        pageSizeOptions={[2, 5, 10]}
+        pageSizeOptions={[DEFAULT_ROWS_PER_PAGE, 5, 10]}
       />
     </Box>
   );
