@@ -44,14 +44,14 @@ export default function IssueContactDataGrid({ userData, onDeleteClick, onBulkDe
       field: null,
       headerName: selectedRows.length > 1 ? (
         <IconButton aria-label="delete" onClick={() => onBulkDeleteClick(selectedRows)} >
-          <FontAwesomeIcon size="xs" color="red" icon={faTrash} />
+          <FontAwesomeIcon size="lg" color="red" icon={faTrash} />
         </IconButton>
       ) : '',
       flex: 1,
       sortable: false,
       renderCell: (params) => (
         <IconButton aria-label="delete" onClick={() => handleDeleteClick(params.id)}>
-          <FontAwesomeIcon size="xs" color="red" icon={faTrash} />
+          <FontAwesomeIcon size="lg" color="red" icon={faTrash} />
         </IconButton>
       ),
     },
@@ -74,6 +74,7 @@ export default function IssueContactDataGrid({ userData, onDeleteClick, onBulkDe
   return (
     <Box sx={{ minHeight: "12rem", width: "100%" }}>
       <DataGrid
+        sx={{ minHeight: "10rem" }}
         rows={rows}
         columns={columns}
         initialState={{
