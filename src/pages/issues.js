@@ -2,16 +2,13 @@
 import React, { useEffect, useState } from "react";
 import {
   Container,
-  TextField,
   Select,
   MenuItem,
   Button,
   FormControl,
   InputLabel,
-  Switch,
   Typography,
   Box,
-  InputAdornment,
   FormHelperText,
   useTheme,
 } from "@mui/material";
@@ -22,16 +19,12 @@ import {
   roleOptions,
   userData,
 } from "../util/mockData";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCalendar } from "@fortawesome/free-solid-svg-icons";
 import { dataTransformer, logout } from "../util/helper";
 import { useNavigate } from "react-router-dom";
 import moment from "moment";
 import IssueContactDataGrid from "../components/data-grid/issue-contact-data-grid";
 import { showSnackbar } from "../events/snackBarEmitter";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import { LocalizationProvider } from "@mui/x-date-pickers";
-import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
+import CreateIssue from "../components/issue/create-issue";
 
 const Issues = () => {
   const [issue, setIssue] = useState({
@@ -184,259 +177,74 @@ const Issues = () => {
             marginTop: "3rem",
           }}
         >
+          <Box>
+            <CreateIssue
+              lastUpdatedOn={lastUpdatedOn}
+              inputErrors={inputErrors}
+              issue={issue}
+              handleCreateIssueInputChange={handleCreateIssueInputChange}
+            />
+          </Box>
+
+          <Box sx={{ paddingTop: "2rem" }}></Box>
+
           <Typography variant="h4" gutterBottom>
-            Create an Issue
+            Issue Contact
           </Typography>
-          <Typography variant="h5" gutterBottom>
-            Last updated on {lastUpdatedOn.format("DD.MM.YYYY hh:mm a")}
-          </Typography>
-          <form className="issue-form">
-            <Box
-              sx={{
-                display: "grid",
-                gridTemplateColumns: "repeat(5, 1fr)",
-                gap: 3,
-                marginTop: "3rem",
-              }}
+
+          <Box sx={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: 3 }}>
+            <FormControl
+              sx={{ gridColumn: "span 2" }}
+              fullWidth
+              margin="normal"
+              error={!!assignContactInputErrors.role}
             >
-              <FormControl fullWidth margin="normal">
-                <TextField
-                  error={!!inputErrors.title}
-                  helperText={inputErrors.title}
-                  label="Title"
-                  name="title"
-                  value={issue.title}
-                  onChange={handleCreateIssueInputChange}
-                  InputLabelProps={{ shrink: true }}
-                />
-              </FormControl>
-              <FormControl fullWidth margin="normal" error={!!inputErrors.priority}>
-                <InputLabel shrink>Priority</InputLabel>
-                <Select
-                  notched
-                  label="Priority"
-                  name="priority"
-                  value={issue.priority}
-                  onChange={handleCreateIssueInputChange}
-                >
-                  {priorityOptions.map((option) => (
-                    <MenuItem key={option.value} value={option.value}>
-                      {option.label}
-                    </MenuItem>
-                  ))}
-                </Select>
-                <FormHelperText>{inputErrors.priority}</FormHelperText>
-              </FormControl>
-              <FormControl fullWidth margin="normal" error={!!inputErrors.dcSwitchStatus}>
-                <InputLabel shrink>DC Switch Status</InputLabel>
-                <Select
-                  notched
-                  label="DC Switch Status"
-                  name="dcSwitchStatus"
-                  value={issue.dcSwitchStatus}
-                  onChange={handleCreateIssueInputChange}
-                >
-                  {dcSwitchStatusOptions.map((option) => (
-                    <MenuItem key={option.value} value={option.value}>
-                      {option.label}
-                    </MenuItem>
-                  ))}
-                </Select>
-                <FormHelperText>{inputErrors.dcSwitchStatus}</FormHelperText>
-              </FormControl>
-              <FormControl fullWidth margin="normal" error={!!inputErrors.status}>
-                <InputLabel shrink>Status</InputLabel>
-                <Select
-                  notched
-                  label="Status"
-                  name="status"
-                  value={issue.status}
-                  onChange={handleCreateIssueInputChange}
-                >
-                  {statusOptions.map((option) => (
-                    <MenuItem key={option.value} value={option.value}>
-                      {option.label}
-                    </MenuItem>
-                  ))}
-                </Select>
-                <FormHelperText>{inputErrors.status}</FormHelperText>
-              </FormControl>
-              <Box
-                display={"flex"}
-                justifyContent={"start"}
-                alignItems={"center"}
-                marginLeft={"16px"}
-                height={"83px"}
+              <InputLabel shrink>Select Role</InputLabel>
+              <Select
+                notched
+                label="Select Role"
+                name="role"
+                value={issue.role}
+                onChange={handleRoleChange}
               >
-                <Typography component="div">
-                  <Switch
-                    checked={issue.electrical}
-                    onChange={handleCreateIssueInputChange}
-                    name="electrical"
-                  />
-                  Electrical
-                </Typography>
-              </Box>
-            </Box>
-            <br></br>
-
-            <Box
-              sx={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: 3, width: "100%" }}
+                {roleOptions.map((option) => (
+                  <MenuItem key={option.value} value={option.value}>
+                    {option.label}
+                  </MenuItem>
+                ))}
+              </Select>
+              <FormHelperText>{assignContactInputErrors.role}</FormHelperText>
+            </FormControl>
+            <FormControl
+              sx={{ gridColumn: "span 2" }}
+              fullWidth
+              margin="normal"
+              error={!!assignContactInputErrors.user}
             >
-              <FormControl fullWidth margin="normal" sx={{ gridColumn: "span 2" }}>
-                <TextField
-                  error={!!inputErrors.description}
-                  helperText={inputErrors.description}
-                  sx={{ gridColumn: "span 2" }}
-                  label="Description"
-                  name="description"
-                  value={issue.description}
-                  onChange={handleCreateIssueInputChange}
-                  fullWidth
-                  margin="normal"
-                  multiline
-                  rows={4}
-                  InputLabelProps={{ shrink: true }}
-                  InputProps={{
-                    endAdornment: (
-                      <InputAdornment sx={{ alignSelf: "flex-start", mt: "8px" }} position="end">
-                        <FontAwesomeIcon icon={faCalendar} />
-                      </InputAdornment>
-                    ),
-                  }}
-                />
-              </FormControl>
-
-              <FormControl fullWidth margin="normal">
-                {/* <TextField
-                error={!!inputErrors.repairDate}
-                helperText={inputErrors.repairDate}
-                label="Repair Date"
-                name="repairDate"
-                value={issue.repairDate}
-                onChange={handleCreateIssueInputChange}
-                fullWidth
-                margin="normal"
-                type="date"
-                InputLabelProps={{ shrink: true }}
-              /> */}
-                <LocalizationProvider dateAdapter={AdapterMoment}>
-                  <DatePicker
-                    format="DD.MM.YYYY"
-                    label="Repair Date"
-                    name="repairDate"
-                    value={issue.repairDate ? moment(issue.repairDate) : null}
-                    onChange={(date) =>
-                      handleCreateIssueInputChange({ target: { name: "repairDate", value: date } })
-                    }
-                    slotProps={{
-                      textField: {
-                        error: !!inputErrors.repairDate,
-                        helperText: inputErrors.repairDate,
-                        InputLabelProps: { shrink: true },
-                        sx: {
-                          "& .MuiInputAdornment-root": {
-                            "& .MuiSvgIcon-root": {
-                              fontSize: "1.25rem", // Adjust the size as needed
-                            },
-                          },
-                          marginTop: "16px",
-                        },
-                      },
-                    }}
-                  />
-                </LocalizationProvider>
-              </FormControl>
-
-              <FormControl fullWidth margin="normal">
-                <TextField
-                  error={!!inputErrors.timeEstimate}
-                  helperText={inputErrors.timeEstimate}
-                  label="Time Estimate Hours"
-                  name="timeEstimate"
-                  value={issue.timeEstimate}
-                  onChange={handleCreateIssueInputChange}
-                  fullWidth
-                  margin="normal"
-                  type="number"
-                  InputLabelProps={{ shrink: true }}
-                />
-              </FormControl>
-
-              <Box
-                display={"flex"}
-                justifyContent={"start"}
-                alignItems={"center"}
-                marginLeft={"16px"}
-                marginTop={"16px"}
-                height={"83px"}
+              <InputLabel shrink>Select User</InputLabel>
+              <Select
+                notched
+                label="Select User"
+                name="user"
+                value={issue.user}
+                onChange={handleUserChange}
               >
-                <Typography component="div">
-                  <Switch checked={issue.hub} onChange={handleCreateIssueInputChange} name="hub" />
-                  Hub
-                </Typography>
-              </Box>
-            </Box>
+                {userOptions.map((option) => (
+                  <MenuItem key={option.value} value={option.value}>
+                    {option.label}
+                  </MenuItem>
+                ))}
+              </Select>
+              <FormHelperText>{assignContactInputErrors.user}</FormHelperText>
+            </FormControl>
 
-            <Box sx={{ paddingTop: "2rem" }}></Box>
+            <FormControl fullWidth margin="normal">
+              <Button variant="contained" color="primary" onClick={handleAssignUser}>
+                Assign
+              </Button>
+            </FormControl>
+          </Box>
 
-            <Typography variant="h4" gutterBottom>
-              Issue Contact
-            </Typography>
-
-            <Box sx={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: 3 }}>
-              <FormControl
-                sx={{ gridColumn: "span 2" }}
-                fullWidth
-                margin="normal"
-                error={!!assignContactInputErrors.role}
-              >
-                <InputLabel shrink>Select Role</InputLabel>
-                <Select
-                  notched
-                  label="Select Role"
-                  name="role"
-                  value={issue.role}
-                  onChange={handleRoleChange}
-                >
-                  {roleOptions.map((option) => (
-                    <MenuItem key={option.value} value={option.value}>
-                      {option.label}
-                    </MenuItem>
-                  ))}
-                </Select>
-                <FormHelperText>{assignContactInputErrors.role}</FormHelperText>
-              </FormControl>
-              <FormControl
-                sx={{ gridColumn: "span 2" }}
-                fullWidth
-                margin="normal"
-                error={!!assignContactInputErrors.user}
-              >
-                <InputLabel shrink>Select User</InputLabel>
-                <Select
-                  notched
-                  label="Select User"
-                  name="user"
-                  value={issue.user}
-                  onChange={handleUserChange}
-                >
-                  {userOptions.map((option) => (
-                    <MenuItem key={option.value} value={option.value}>
-                      {option.label}
-                    </MenuItem>
-                  ))}
-                </Select>
-                <FormHelperText>{assignContactInputErrors.user}</FormHelperText>
-              </FormControl>
-
-              <FormControl fullWidth margin="normal">
-                <Button variant="contained" color="primary" onClick={handleAssignUser}>
-                  Assign
-                </Button>
-              </FormControl>
-            </Box>
-          </form>
           <Box style={{ paddingTop: "2rem" }}>
             <IssueContactDataGrid
               userData={assignedUsers}
