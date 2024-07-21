@@ -18,10 +18,10 @@ export default function Dashboard() {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          height: "100vh",
+          height: "80vh",
         }}
       >
-        <Typography variant="h4" gutterBottom>
+        <Typography variant="h2" gutterBottom>
           Welcome to Dashboard
         </Typography>
       </Box>

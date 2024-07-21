@@ -122,6 +122,7 @@ function Login() {
       })),
     []
   );
+
   const LoginRightSideWrapper = styled(Box)(({ theme }) => ({
     flex: 1,
     [theme.breakpoints.up("md")]: {
@@ -135,6 +136,7 @@ function Login() {
       display: "none",
     },
   }));
+
   const LoginSVGWrapper = styled(Box)(({ theme }) => ({
     display: "flex",
     alignItems: "end",
@@ -195,11 +197,11 @@ function Login() {
                 onChange={(e) => setUsername(e.target.value)}
                 InputProps={{
                   startAdornment: (
-                    <Box sx={{ paddingInlineStart: "0.3rem", paddingInlineEnd: "0.3rem" }}>
-                      {" "}
-                      <FontAwesomeIcon icon={faUser} />{" "}
+                    <Box sx={{ paddingInlineEnd: "0.3rem" }}>
+                      <FontAwesomeIcon icon={faUser} />
                     </Box>
                   ),
+
                 }}
               />
               <TextField
@@ -230,7 +232,7 @@ function Login() {
                     </InputAdornment>
                   ),
                   startAdornment: (
-                    <Box sx={{ paddingInlineStart: "0.3rem", paddingInlineEnd: "0.3rem" }}>
+                    <Box sx={{ paddingInlineEnd: "0.3rem" }}>
                       <FontAwesomeIcon icon={faLock} />
                     </Box>
                   ),
