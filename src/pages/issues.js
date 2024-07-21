@@ -86,11 +86,7 @@ const Issues = () => {
   };
 
   const handleCreateIssueInputChange = (e) => {
-    console.log(e);
     const { name, value, type, checked } = e.target;
-    console.log("Create Issue Save-wala: ", {
-      [name]: type === "checkbox" ? checked : value ?? "",
-    });
     setIssue({
       ...issue,
       [name]: type === "checkbox" ? checked : value ?? "",
@@ -188,6 +184,7 @@ const Issues = () => {
     if (!issue.description) tempErrors.description = "Please enter description";
     if (!issue.repairDate) tempErrors.repairDate = "Please select repair date";
     if (!issue.timeEstimate) tempErrors.timeEstimate = "Please enter time estimate";
+    if (issue.timeEstimate <= 0) tempErrors.timeEstimate = "Time estimate must be greater than 0";
 
     setInputErrors(tempErrors);
     return Object.keys(tempErrors).length === 0;
