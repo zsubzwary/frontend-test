@@ -31,12 +31,12 @@ function App() {
   return (
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
-        <Router>
+        <Router basename={process.env.PUBLIC_URL}>
           <CssBaseline />
           <Routes>
             <Route element={<ProtectedRoutes />}>
               <Route element={<MainLayout />}>
-                <Route path="/" element={<Dashboard />} />
+                <Route exact path="/" element={<Dashboard />} />
                 <Route path="/issues" element={<Issues />} />
                 <Route path="/projects" element={<BlankPage />} />
                 <Route path="/map" element={<BlankPage />} />
