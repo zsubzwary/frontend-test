@@ -8,6 +8,7 @@ import IssueContactDataGrid from "../components/issue/IssueContactDataGrid";
 import { showSnackbar } from "../events/SnackBarEmitter";
 import CreateIssue from "../components/issue/CreateIssue";
 import AssignIssueContact from "../components/issue/AssignIssueContact";
+import { showAlert } from "../events/AlertDialogEmitter";
 
 const Issues = () => {
   const DEFAULT_SNACKBAR_DURATION = 3500;
@@ -183,6 +184,23 @@ const Issues = () => {
     }
   };
 
+  const handleLogout = () => {
+
+    showAlert(
+      "Logout",
+      "Are you sure you want to logout?",
+      () => {
+        if (logout()) {
+          clearDataFromStorage();
+          navigate("/login");
+        }
+      },
+      () => {},
+      "Yes",
+      "No"
+    );
+  }
+
   return (
     <Box>
       <Box>
@@ -195,12 +213,7 @@ const Issues = () => {
         <Box display={"flex"} justifyContent={"end"} gap={"15px"}>
           <Button
             variant="outlined"
-            onClick={() => {
-              if (logout()) {
-                clearDataFromStorage();
-                navigate("/login");
-              }
-            }}
+            onClick={() => {handleLogout();}}
           >
             Log Out
           </Button>
