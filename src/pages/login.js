@@ -101,7 +101,7 @@ function Login() {
     }
   };
 
-  // Responsive UI Wrappers Start
+  // Code for Responsive UI Wrappers Start
   const LoginLeftSideWrapper = useMemo(
     () =>
       styled(Box)(({ theme }) => ({

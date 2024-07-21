@@ -186,7 +186,7 @@ export default function CreateIssue({
                   sx: {
                     "& .MuiInputAdornment-root": {
                       "& .MuiSvgIcon-root": {
-                        fontSize: "1.25rem", // Adjust the size as needed
+                        fontSize: "1.25rem",
                       },
                     },
                     marginTop: "16px",

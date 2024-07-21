@@ -2,7 +2,6 @@ import React, { useState, useMemo } from "react";
 import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
-// import Issues from './Issues';
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { ProtectedRoutes } from "./util/ProtectedRoutes";
 import Issues from "./pages/Issues";

@@ -69,7 +69,6 @@ export default function IssueContactDataGrid({ userData, onDeleteClick, onBulkDe
 
   const handleDeleteClick = (id) => {
     onDeleteClick(id);
-    // setRows((prevRows) => prevRows.filter((row) => row.id !== id));
   };
 
   return (

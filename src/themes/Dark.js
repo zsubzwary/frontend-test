@@ -91,7 +91,7 @@ export const DarkTheme = {
     MuiFormHelperText: {
       styleOverrides: {
         root: {
-          fontSize: "0.75rem", // Adjust the font size as needed
+          fontSize: "0.75rem",
         },
       },
     },
