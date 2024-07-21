@@ -35,6 +35,26 @@ export const isUserLoggedIn = () => {
 };
 
 /**
+ * Retrieves the login method used by the user.
+ *
+ * @return {string} The login method used by the user. Possible values are "localStorage", "sessionStorage", "" or "error".
+ */
+export const getUserLoginMethod = () => {
+  try {
+    if (localStorage.getItem("loggedIn") === "true") {
+      return "localStorage";
+    } else if (sessionStorage.getItem("loggedIn") === "true") {
+      return "sessionStorage";
+    } else {
+      return "";
+    }
+  } catch (error) {
+    console.error(error);
+    return "error";
+  }
+};
+
+/**
  * Transforms input data into a new format with 'value' and 'label' properties.
  * Primary use-case is for react-select
  *

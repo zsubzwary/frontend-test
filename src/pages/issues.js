@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Container, Button, Box, useTheme } from "@mui/material";
 import { roleOptions, userData } from "../util/MockData";
-import { dataTransformer, logout } from "../util/Helper";
+import { dataTransformer, getUserLoginMethod, isUserLoggedIn, logout } from "../util/Helper";
 import { useNavigate } from "react-router-dom";
 import moment from "moment";
 import IssueContactDataGrid from "../components/issue/IssueContactDataGrid";
@@ -35,9 +35,9 @@ const Issues = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const savedIssue = sessionStorage.getItem("issue");
-    const savedAssignedUsers = sessionStorage.getItem("assignedUsers");
-    const savedLastUpdatedOn = sessionStorage.getItem("lastUpdatedOn");
+    const savedIssue = sessionStorage.getItem("issue") || localStorage.getItem("issue");
+    const savedAssignedUsers = sessionStorage.getItem("assignedUsers") || localStorage.getItem("assignedUsers");
+    const savedLastUpdatedOn = sessionStorage.getItem("lastUpdatedOn") || localStorage.getItem("lastUpdatedOn");
 
     if (savedIssue) setIssue(JSON.parse(savedIssue));
     if (savedAssignedUsers) setAssignedUsers(JSON.parse(savedAssignedUsers));
@@ -45,10 +45,25 @@ const Issues = () => {
   }, []);
 
   const saveDataToSessionStorage = () => {
-    sessionStorage.setItem("issue", JSON.stringify(issue));
-    sessionStorage.setItem("assignedUsers", JSON.stringify(assignedUsers));
-    sessionStorage.setItem("lastUpdatedOn", moment().toISOString());
-    //NOTE: 👆 The reason moment object is created in here instead of getting the value from the state is because the value in state might not have been updated yet, because React underlyingly batches setState() calls, and it is not updated synchronously.
+    let lastUpdated = moment().toISOString();
+    //NOTE: 👆 The reason moment object is created in here instead of getting the value from the state is
+    //          because the value in state might not have been updated yet,
+    //          because React underlyingly batches setState() calls, and it is not updated synchronously.
+
+    if (getUserLoginMethod() === "localStorage") {
+      localStorage.setItem("issue", JSON.stringify(issue));
+      localStorage.setItem("assignedUsers", JSON.stringify(assignedUsers));
+      localStorage.setItem("lastUpdatedOn", lastUpdated);
+    } else if (getUserLoginMethod() === "sessionStorage") {
+      sessionStorage.setItem("issue", JSON.stringify(issue));
+      sessionStorage.setItem("assignedUsers", JSON.stringify(assignedUsers));
+      sessionStorage.setItem("lastUpdatedOn", lastUpdated);
+    } else {
+      showSnackbar("Unable to save data, Kindly refresh", 6500);
+      return;
+    }
+
+    showSnackbar("Data saved successfully", 3500);
   };
 
   const clearDataFromSessionStorage = () => {
