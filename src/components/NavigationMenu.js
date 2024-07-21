@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import MuiDrawer from "@mui/material/Drawer";
@@ -23,7 +23,7 @@ import {
   faMoon,
   faUsers,
 } from "@fortawesome/free-solid-svg-icons";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { ColorModeContext } from "../App";
 import DarkModeSwitch from "./common/DarkModeSwitch";
 
@@ -77,27 +77,26 @@ const AppBar = styled(MuiAppBar, {
   }),
 }));
 
-const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== "open" })(
-  ({ theme, open }) => ({
-    width: drawerWidth,
-    flexShrink: 0,
-    whiteSpace: "nowrap",
-    boxSizing: "border-box",
-    ...(open && {
-      ...openedMixin(theme),
-      "& .MuiDrawer-paper": openedMixin(theme),
-    }),
-    ...(!open && {
-      ...closedMixin(theme),
-      "& .MuiDrawer-paper": closedMixin(theme),
-    }),
-  })
-);
+const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== "open" })(({ theme, open }) => ({
+  width: drawerWidth,
+  flexShrink: 0,
+  whiteSpace: "nowrap",
+  boxSizing: "border-box",
+  ...(open && {
+    ...openedMixin(theme),
+    "& .MuiDrawer-paper": openedMixin(theme),
+  }),
+  ...(!open && {
+    ...closedMixin(theme),
+    "& .MuiDrawer-paper": closedMixin(theme),
+  }),
+}));
 
 export default function NavigationMenu() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
   const colorMode = useContext(ColorModeContext);
   const [selectedIndex, setSelectedIndex] = React.useState(0);
 
@@ -266,7 +265,13 @@ export default function NavigationMenu() {
     },
   ];
 
-  console.log("string", selectedIndex);
+  useEffect(() => {
+    const currentRoute = location.pathname.replace(process.env.PUBLIC_URL, "");
+    const currentMenuItem = menuItems.find((item) => item.route === currentRoute);
+    if (currentMenuItem) {
+      setSelectedIndex(currentMenuItem.selectedIndex);
+    }
+  }, [location.pathname, menuItems]);
 
   const handleListItemClick = (event, index) => {
     if (index === 0 || index) {
