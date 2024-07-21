@@ -10,6 +10,8 @@ import { DarkTheme } from "./themes/Dark";
 import { createTheme } from "@mui/material";
 import MainLayout from "./components/layout/MainLayout";
 import BlankPage from "./pages/Blank";
+import GlobalSnackbar from "./components/common/GlobalSnackBar";
+import AlertDialog from "./components/common/AlertDialog";
 
 export const ColorModeContext = React.createContext({ toggleColorMode: () => {} });
 
@@ -59,6 +61,8 @@ function App() {
             <Route path="/login" element={<Login />} />
           </Routes>
         </Router>
+        <AlertDialog />
+        <GlobalSnackbar />
       </ThemeProvider>
     </ColorModeContext.Provider>
   );
