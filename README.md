@@ -19,6 +19,8 @@ This project is a React-based web application designed to manage issues within a
 - **Left Navigation Menu**: Includes hover and select functionality with appropriate color changes.
 - **Issues Page**: Users can fill out a form with various fields including text, dropdowns, and number inputs to create an issue.
 - **Role Assignment**: Assign roles to users, coupled with email and phone numbers, and manage these assignments.
+- **Dark Mode**: Users can use the app in Dark mode. _(static assets like images are yet pending for dark-mode)_
+
 
 ### Additional Enhancements
 1. **Bulk Delete Feature**: Users can bulk delete contacts in the issue assignment table.
