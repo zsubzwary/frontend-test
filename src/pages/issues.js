@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Container, Button, Box, useTheme } from "@mui/material";
+import { Container, Button, Box, useTheme, Backdrop, CircularProgress } from "@mui/material";
 import { roleOptions, userData } from "../util/MockData";
 import { dataTransformer, getUserLoginMethod, isUserLoggedIn, logout } from "../util/Helper";
 import { useNavigate } from "react-router-dom";
@@ -11,6 +11,8 @@ import AssignIssueContact from "../components/issue/AssignIssueContact";
 
 const Issues = () => {
   const DEFAULT_SNACKBAR_DURATION = 3500;
+
+  const [loading, setLoading] = useState(true);
 
   const [issue, setIssue] = useState({
     title: "",
@@ -44,6 +46,12 @@ const Issues = () => {
     if (savedIssue) setIssue(JSON.parse(savedIssue));
     if (savedAssignedUsers) setAssignedUsers(JSON.parse(savedAssignedUsers));
     if (savedLastUpdatedOn) setLastUpdatedOn(moment(savedLastUpdatedOn));
+
+    // 👇 This is simlation of loading data from server
+    setTimeout(() => {
+      setLoading(false);
+    }, 800);
+
   }, []);
 
   const saveDataToSessionStorage = () => {
@@ -177,6 +185,12 @@ const Issues = () => {
 
   return (
     <Box>
+      <Box>
+        <Backdrop sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }} open={loading} >
+          <CircularProgress color="inherit" />
+        </Backdrop>
+      </Box>
+
       <Container sx={{ paddingBottom: "3rem" }}>
         <Box display={"flex"} justifyContent={"end"} gap={"15px"}>
           <Button
