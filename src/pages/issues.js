@@ -54,6 +54,11 @@ const Issues = () => {
     }, 800);
   }, []);
 
+  /**
+   * Save data to storage based on user login method.
+   *
+   * @return {void} No return value
+   */
   const saveDataToStorage = () => {
     let lastUpdated = moment().toISOString();
     //NOTE: 👆 The reason moment object is created in here instead of getting the value from the state is
@@ -76,6 +81,9 @@ const Issues = () => {
     showSnackbar("Data saved successfully", DEFAULT_SNACKBAR_DURATION);
   };
 
+  /**
+   * Clears data from session and local storage related to issues and assigned users.
+   */
   const clearDataFromStorage = () => {
     sessionStorage.removeItem("issue");
     sessionStorage.removeItem("assignedUsers");
@@ -85,6 +93,12 @@ const Issues = () => {
     localStorage.removeItem("lastUpdatedOn");
   };
 
+  /**
+   * Updates the issue state and input errors state based on the input change event.
+   *
+   * @param {Event} e - The input change event.
+   * @return {void} This function does not return a value.
+   */
   const handleCreateIssueInputChange = (e) => {
     const { name, value, type, checked } = e.target;
     setIssue({
@@ -94,16 +108,34 @@ const Issues = () => {
     setInputErrors((prevErrors) => ({ ...prevErrors, [name]: "" }));
   };
 
+  /**
+   * Updates the selected role and clears the role input error when the user selects a new value.
+   *
+   * @param {Event} event - The event object triggered by the user selecting a new value.
+   * @return {void} This function does not return a value.
+   */
   const handleRoleChange = (event) => {
     setSelectedRole(event.target.value);
     setAssignContactInputErrors((prevErrors) => ({ ...prevErrors, role: "" }));
   };
 
+  /**
+   * Updates the selected user and clears the user input error when the user selects a new value.
+   *
+   * @param {Event} event - The event object triggered by the user selecting a new value.
+   * @return {void} This function does not return a value.
+   */
   const handleUserChange = (event) => {
     setSelectedUser(event.target.value);
     setAssignContactInputErrors((prevErrors) => ({ ...prevErrors, user: "" }));
   };
 
+  /**
+   * Validates the issue contact by checking if role and user are selected.
+   * This also set the values in state for teh error msgs to be displayed on the fileds.
+   *
+   * @return {boolean} Returns true if no errors are found, otherwise false.
+   */
   const validateIssueContact = () => {
     let tempErrors = {};
     if (!selectedRole) tempErrors.role = "Please select role";
@@ -112,6 +144,16 @@ const Issues = () => {
     return Object.keys(tempErrors).length === 0;
   };
 
+  /**
+   * Handles the assignment of a user to an issue.
+   *
+   * This function validates the issue contact and checks if a selected role and user are provided.
+   * If both are provided, it checks if the user is already assigned to the issue.
+   * If the user is not already assigned, it assigns the user to the issue and displays a success message.
+   * If the user is already assigned, it updates the assign contact input errors to indicate that the user is already assigned.
+   *
+   * @return {void} This function does not return a value.
+   */
   const handleAssignUser = () => {
     let isValid = validateIssueContact();
 
@@ -145,6 +187,12 @@ const Issues = () => {
     }
   };
 
+  /**
+   * Handles the removal of an assigned user.
+   *
+   * @param {number} id - The ID of the user to be removed.
+   * @return {void} This function does not return anything.
+   */
   const handleRemoveUser = (id) => {
     showAlert(
       "Remove Assigned User?",
@@ -159,6 +207,12 @@ const Issues = () => {
     );
   };
 
+  /**
+   * Handles the removal of multiple assigned users.
+   *
+   * @param {Array<number>} ids - The IDs of the users to be removed.
+   * @return {void} This function does not return anything.
+   */
   const handleBulkRemoveUsers = (ids) => {
     showAlert(
       "Removing Multiple Assigned Users?",
@@ -173,6 +227,11 @@ const Issues = () => {
     );
   };
 
+  /**
+   * Validates the creation of an issue based on the provided input values.
+   *
+   * @return {boolean} Returns true if the input values are valid, otherwise false.
+   */
   const validateCreateIssue = () => {
     let tempErrors = {};
     if (!issue.title) tempErrors.title = "Please enter title";
@@ -188,16 +247,24 @@ const Issues = () => {
     return Object.keys(tempErrors).length === 0;
   };
 
+  /**
+   * Validates teh input fields and Handles the saving of changes if the input fields are valid.
+   *
+   * @return {void} No return value.
+   */
   const handleSaveChanges = () => {
     let isValid = validateCreateIssue();
 
     if (isValid) {
       setLastUpdatedOn(moment());
       saveDataToStorage();
-      console.log("Current changes - Saved:", issue);
     }
   };
 
+  /**
+   * Handles the logout functionality by showing an alert to confirm the logout action,
+   * then logging out, clearing data from storage, and navigating to the login page.
+   */
   const handleLogout = () => {
     showAlert(
       "Logout?",
