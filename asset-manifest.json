@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/zsubzwary/frontend-test/static/css/main.fafd162f.css",
+    "main.js": "/zsubzwary/frontend-test/static/js/main.393d3fbe.js",
+    "static/js/453.1f6f1266.chunk.js": "/zsubzwary/frontend-test/static/js/453.1f6f1266.chunk.js",
+    "static/media/login.svg": "/zsubzwary/frontend-test/static/media/login.c1eb65033eb2e8b3ca4ba5426df4470f.svg",
+    "static/media/logo.svg": "/zsubzwary/frontend-test/static/media/logo.7412a1e84c434970d31b8bcfa8fdf5d9.svg",
+    "index.html": "/zsubzwary/frontend-test/index.html",
+    "main.fafd162f.css.map": "/zsubzwary/frontend-test/static/css/main.fafd162f.css.map",
+    "main.393d3fbe.js.map": "/zsubzwary/frontend-test/static/js/main.393d3fbe.js.map",
+    "453.1f6f1266.chunk.js.map": "/zsubzwary/frontend-test/static/js/453.1f6f1266.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.fafd162f.css",
+    "static/js/main.393d3fbe.js"
+  ]
+}
