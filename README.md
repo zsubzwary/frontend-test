@@ -1,70 +1,160 @@
-# Getting Started with Create React App
+# React Application for Issue Management
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is a React-based web application designed to manage issues within a system. The application includes features for user authentication, issue tracking, and managing user roles and assignments. Below is a detailed guide on how to run the application locally, along with an overview of the features implemented beyond the initial requirements.
 
-## Available Scripts
+## Table of Contents
+1. [Features](#features)
+2. [Setup Instructions](#setup-instructions)
+3. [Project Structure](#project-structure)
+4. [Running the Application](#running-the-application)
+5. [Usage](#usage)
+6. [Enhancements](#enhancements)
 
-In the project directory, you can run:
+## Features
 
-### `npm start`
+### Core Features
+- **User Authentication**: Users can log in, stay logged in with the "keep me logged in" option, and log out.
+- **Left Navigation Menu**: Includes hover and select functionality with appropriate color changes.
+- **Issues Page**: Users can fill out a form with various fields including text, dropdowns, and number inputs to create an issue.
+- **Role Assignment**: Assign roles to users, coupled with email and phone numbers, and manage these assignments.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Additional Enhancements
+1. **Bulk Delete Feature**: Users can bulk delete contacts in the issue assignment table.
+2. **DatePicker**: A DatePicker component is used for date inputs instead of a simple text field.
+3. **Event-Based SnackBar**: A reusable SnackBar component for notifications throughout the project.
+4. **Event-Based AlertDialog**: A reusable AlertDialog component for confirmations and alerts.
+5. **Data Validation**: Enhanced validation before saving data to ensure data integrity.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Setup Instructions
 
-### `npm test`
+### Prerequisites
+- Node.js (v18 or above)
+- npm (v9 or above)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Installation
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/zsubzwary/frontend-test.git
+   cd frontend-test
+   ```
 
-### `npm run build`
+2. Install the dependencies:
+   ```sh
+   npm install
+   ```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Project Structure
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```├── README.md
+├── package-lock.json
+├── package.json
+├── public
+│   ├── favicon.ico
+│   ├── index.html
+│   ├── logo192.png
+│   ├── logo512.png
+│   ├── manifest.json
+│   └── robots.txt
+└── src
+    ├── App.css
+    ├── App.js
+    ├── App.test.js
+    ├── assets
+    │   ├── eye.svg
+    │   ├── login.svg
+    │   ├── logo.svg
+    │   ├── password-lock.svg
+    │   └── username.svg
+    ├── components
+    │   ├── NavigationMenu.js
+    │   ├── common
+    │   │   ├── AlertDialog.js
+    │   │   ├── DarkModeSwitch.js
+    │   │   └── GlobalSnackBar.js
+    │   ├── issue
+    │   │   ├── AssignIssueContact.js
+    │   │   ├── CreateIssue.js
+    │   │   └── IssueContactDataGrid.js
+    │   └── layout
+    │       └── MainLayout.js
+    ├── css
+    │   └── issue-page.css
+    ├── events
+    │   ├── AlertDialogEmitter.js
+    │   ├── EventEmitter.js
+    │   └── SnackBarEmitter.js
+    ├── index.css
+    ├── index.js
+    ├── logo.svg
+    ├── pages
+    │   ├── Blank.js
+    │   ├── Dashboard.js
+    │   ├── Issues.js
+    │   └── Login.js
+    ├── reportWebVitals.js
+    ├── setupTests.js
+    ├── themes
+    │   ├── Dark.js
+    │   ├── Default.js
+    │   └── Light.js
+    └── util
+        ├── Helper.js
+        ├── MockData.js
+        └── ProtectedRoutes.js
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Running the Application
 
-### `npm run eject`
+1. Start the development server:
+   ```sh
+   npm start
+   ```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+2. Open your browser and navigate to `http://localhost:3000`.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Usage
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Logging In
+- Enter your credentials on the login page.
+  - Any username having length b/w 6 & 20 while valid characters are english alphabets, numbers, hypen _(dash)_ & underscore.
+  - Any password having length b/w 8 & 30
+  - Example Login would be username `john_adam` having password `securePassword`
+- Use the "eye" icon to view the password.
+- Check "Keep me logged in" to stay logged in across browser sessions.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Navigating
+- Hover over the left navigation menu to expand it.
+- Click on sections to navigate to different pages. Only the Issues page has content.
 
-## Learn More
+### Issues Page
+- Fill out the form with details including priority, status, and other fields.
+- Assign roles to users and manage these assignments with add/remove and bulk delete features.
+- Use the DatePicker for selecting dates.
+- Save your work, which is stored in the browser.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Alerts and Notifications
+- SnackBars are used for quick & short notifications.
+- AlertDialogs are used for confirmations.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Enhancements
 
-### Code Splitting
+### Bulk Delete Feature
+Allows users to select and delete multiple contacts in the issue assignment table at once, enhancing user productivity.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### DatePicker
+Provides a user-friendly way to select dates, improving the overall user experience.
 
-### Analyzing the Bundle Size
+### Event-Based SnackBar
+A reusable notification component that can be triggered from anywhere in the application, providing consistent feedback to users.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### Event-Based AlertDialog
+A reusable dialog component for confirmations and alerts, enhancing consistency and reducing redundancy.
 
-### Making a Progressive Web App
+### Data Validation
+Ensures that all input data is validated before saving, improving data integrity and reducing errors.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+---
 
-### Advanced Configuration
+This project was developed with a focus on usability, maintainability, and scalability. The additional features and enhancements aim to provide a more robust and user-friendly experience. For any questions or contributions, feel free to reach out or submit a pull request.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Happy coding!
