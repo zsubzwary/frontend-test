@@ -8,8 +8,8 @@ export const DarkTheme = {
       main: "#f50057",
     },
     background: {
-      default: '#000000',
-      customBox: '#292C26'
+      default: "#000000",
+      customBox: "#292C26",
     },
   },
   components: {
@@ -32,15 +32,15 @@ export const DarkTheme = {
     MuiCssBaseline: {
       styleOverrides: {
         html: {
-          '*::-webkit-scrollbar': {
-            width: '0.2em',
+          "*::-webkit-scrollbar": {
+            width: "0.2em",
           },
-          '*::-webkit-scrollbar-track': {
+          "*::-webkit-scrollbar-track": {
             // '-webkit-box-shadow': 'inset 0 0 6px rgba(0,0,0,0.',
           },
-          '*::-webkit-scrollbar-thumb': {
-            backgroundColor: 'rgba(0,0,0,.4)',
-            outline: '1px solid slategrey',
+          "*::-webkit-scrollbar-thumb": {
+            backgroundColor: "rgba(0,0,0,.4)",
+            outline: "1px solid slategrey",
           },
         },
       },
@@ -48,7 +48,7 @@ export const DarkTheme = {
     MuiButton: {
       styleOverrides: {
         root: {
-          textTransform: 'none'
+          textTransform: "none",
         },
         contained: {
           background: "radial-gradient(84.88% 84.88% at 50% 15.12%, #E7463F 0%, #EF8439 100%)",
@@ -61,7 +61,7 @@ export const DarkTheme = {
           fontWeight: 700,
         },
         outlined: {
-          border: '1px solid #E9513E',
+          border: "1px solid #E9513E",
           borderRadius: 30,
           fontWeight: 700,
         },
@@ -71,7 +71,8 @@ export const DarkTheme = {
       styleOverrides: {
         root: {
           "&.Mui-selected": {
-            background: "radial-gradient(84.88% 84.88% at 50% 15.12%, #E7463F 0%, #EF8439 100%)",
+            background:
+              "radial-gradient(84.88% 84.88% at 50% 15.12%, #E7463F 0%, #EF8439 100%)",
             color: "white",
           },
           "&.Mui-selected > .MuiListItemIcon-root": {
@@ -90,7 +91,7 @@ export const DarkTheme = {
     MuiFormHelperText: {
       styleOverrides: {
         root: {
-          fontSize: '0.75rem', // Adjust the font size as needed
+          fontSize: "0.75rem", // Adjust the font size as needed
         },
       },
     },
@@ -99,16 +100,16 @@ export const DarkTheme = {
     borderRadius: 4,
   },
   typography: {
-    fontSize: '1rem',
+    fontSize: "1rem",
     fontWeightRegular: 400,
-      h4: {
-        fontSize: '1.13rem',
-        fontWeight: 600,
-        color: '#E9513E',
-      },
-      h5: {
-        fontSize: '0.88rem',
-        color: '#898787',
-      }
+    h4: {
+      fontSize: "1.13rem",
+      fontWeight: 600,
+      color: "#E9513E",
+    },
+    h5: {
+      fontSize: "0.88rem",
+      color: "#898787",
+    },
   },
 };

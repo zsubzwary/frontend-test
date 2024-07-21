@@ -8,18 +8,14 @@ import {
   FormControlLabel,
   IconButton,
   InputAdornment,
-  FormControl,
   Box,
 } from "@mui/material";
-import { Visibility, VisibilityOff, PersonOutline, LockOutlined } from "@mui/icons-material";
-import { ReactComponent as EyeIcon } from "../assets/eye.svg";
 import { ReactComponent as LoginSVG } from "../assets/login.svg";
 import { ReactComponent as Logo } from "../assets/logo.svg";
 import { isUserLoggedIn } from "../util/Helper";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash, faLock, faUser } from "@fortawesome/free-solid-svg-icons";
 import { styled } from "@mui/material/styles";
-import Typography from "@mui/material/Typography";
 import { useMemo } from "react";
 
 /**
@@ -78,7 +74,9 @@ function Login() {
       );
       return false;
     } else if (!validCharactersRegex.test(username)) {
-      setUsernameError("Username can only contain letters, digits, underscore (_) and hyphen (-)");
+      setUsernameError(
+        "Username can only contain letters, digits, underscore (_) and hyphen (-)"
+      );
       return false;
     } else {
       setUsernameError(false);
@@ -159,7 +157,13 @@ function Login() {
   return (
     <Box fullWidth>
       <Container style={{ height: "100vh" }} maxWidth="xl">
-        <Box display="flex" justifyItems={"center"} justifyContent={"center"} height="100%" gap={4}>
+        <Box
+          display="flex"
+          justifyItems={"center"}
+          justifyContent={"center"}
+          height="100%"
+          gap={4}
+        >
           {/* Left Side of The Page Start */}
           <LoginLeftSideWrapper sx={{ width: "300px" }}>
             <Box display="flex" margin="auto" mt="10rem" mb="5rem" width="fit-content">
@@ -237,8 +241,8 @@ function Login() {
                   <Checkbox
                     checked={keepLoggedIn}
                     sx={{
-                      marginLeft: '0.5rem',
-                      transform: 'Scale(1.75)',
+                      marginLeft: "0.5rem",
+                      transform: "Scale(1.75)",
                     }}
                     onChange={(e) => setKeepLoggedIn(e.target.checked)}
                   />

@@ -25,7 +25,6 @@ export const userOptions = [
   { value: "jennifer", label: "Jennifer" },
 ];
 
-
 export const userData = [
   {
     id: 1,

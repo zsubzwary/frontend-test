@@ -25,7 +25,8 @@ export const isUserLoggedIn = () => {
   let auth = false;
   try {
     auth =
-      localStorage.getItem("loggedIn") === "true" || sessionStorage.getItem("loggedIn") === "true";
+      localStorage.getItem("loggedIn") === "true" ||
+      sessionStorage.getItem("loggedIn") === "true";
   } catch (error) {
     console.error(error);
   } finally {

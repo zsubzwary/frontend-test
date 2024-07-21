@@ -54,7 +54,10 @@ const CustomSwitch = styled(Switch)(({ theme }) => ({
 export default function DarkModeSwitch({ handleThemeChange }) {
   return (
     <FormGroup>
-      <FormControlLabel control={<CustomSwitch onChange={handleThemeChange} sx={{ m: 1 }} defaultChecked />} label="" />
+      <FormControlLabel
+        control={<CustomSwitch onChange={handleThemeChange} sx={{ m: 1 }} defaultChecked />}
+        label=""
+      />
     </FormGroup>
   );
 }

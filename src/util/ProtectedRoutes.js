@@ -1,5 +1,5 @@
-import { Navigate, Outlet } from 'react-router-dom';
-import { isUserLoggedIn } from './Helper';
+import { Navigate, Outlet } from "react-router-dom";
+import { isUserLoggedIn } from "./Helper";
 
 /**
  * Function to handle protected routes based on user authentication status.
@@ -8,8 +8,6 @@ import { isUserLoggedIn } from './Helper';
  */
 export const ProtectedRoutes = () => {
   const auth = isUserLoggedIn();
-  
-return (
-    auth ? <Outlet/> : <Navigate to='/login'/>
-  )
-}
+
+  return auth ? <Outlet /> : <Navigate to="/login" />;
+};

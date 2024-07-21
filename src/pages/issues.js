@@ -1,13 +1,7 @@
 // Issues.js
 import React, { useEffect, useState } from "react";
 import { Container, Button, Box, useTheme } from "@mui/material";
-import {
-  priorityOptions,
-  dcSwitchStatusOptions,
-  statusOptions,
-  roleOptions,
-  userData,
-} from "../util/MockData";
+import { roleOptions, userData } from "../util/MockData";
 import { dataTransformer, logout } from "../util/Helper";
 import { useNavigate } from "react-router-dom";
 import moment from "moment";
@@ -28,24 +22,23 @@ const Issues = () => {
     electrical: false,
     hub: false,
   });
-  
+
   const [assignedUsers, setAssignedUsers] = useState([]);
   const [lastUpdatedOn, setLastUpdatedOn] = useState(false);
-  
+
   const [inputErrors, setInputErrors] = useState({});
   const [assignContactInputErrors, setAssignContactInputErrors] = useState({});
   const [selectedUser, setSelectedUser] = useState("");
   const [selectedRole, setSelectedRole] = useState("");
   const [userOptions, setUserOptions] = useState(dataTransformer(userData));
-  
+
   const theme = useTheme();
   const navigate = useNavigate();
-  
 
   useEffect(() => {
-    const savedIssue = sessionStorage.getItem('issue');
-    const savedAssignedUsers = sessionStorage.getItem('assignedUsers');
-    const savedLastUpdatedOn = sessionStorage.getItem('lastUpdatedOn');
+    const savedIssue = sessionStorage.getItem("issue");
+    const savedAssignedUsers = sessionStorage.getItem("assignedUsers");
+    const savedLastUpdatedOn = sessionStorage.getItem("lastUpdatedOn");
 
     if (savedIssue) setIssue(JSON.parse(savedIssue));
     if (savedAssignedUsers) setAssignedUsers(JSON.parse(savedAssignedUsers));
@@ -53,16 +46,16 @@ const Issues = () => {
   }, []);
 
   const saveDataToSessionStorage = () => {
-    sessionStorage.setItem('issue', JSON.stringify(issue));
-    sessionStorage.setItem('assignedUsers', JSON.stringify(assignedUsers));
-    sessionStorage.setItem('lastUpdatedOn', moment().toISOString());
+    sessionStorage.setItem("issue", JSON.stringify(issue));
+    sessionStorage.setItem("assignedUsers", JSON.stringify(assignedUsers));
+    sessionStorage.setItem("lastUpdatedOn", moment().toISOString());
     //NOTE: 👆 The reason moment object is created in here instead of getting the value from the state is because the value in state might not have been updated yet, because React underlyingly batches setState() calls, and it is not updated synchronously.
   };
-  
+
   const clearDataFromSessionStorage = () => {
-    sessionStorage.removeItem('issue');
-    sessionStorage.removeItem('assignedUsers');
-    sessionStorage.removeItem('lastUpdatedOn');
+    sessionStorage.removeItem("issue");
+    sessionStorage.removeItem("assignedUsers");
+    sessionStorage.removeItem("lastUpdatedOn");
   };
 
   const handleCreateIssueInputChange = (e) => {
@@ -153,7 +146,7 @@ const Issues = () => {
 
   const handleSaveChanges = () => {
     let isValid = validateCreateIssue();
-    
+
     if (isValid) {
       setLastUpdatedOn(moment());
       saveDataToSessionStorage();

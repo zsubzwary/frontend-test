@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import {
-  Container,
   TextField,
   Select,
   MenuItem,
@@ -130,7 +129,9 @@ export default function CreateIssue({
       </Box>
       <br></br>
 
-      <Box sx={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: 3, width: "100%" }}>
+      <Box
+        sx={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: 3, width: "100%" }}
+      >
         <FormControl fullWidth margin="normal" sx={{ gridColumn: "span 2" }}>
           <TextField
             error={!!inputErrors.description}
