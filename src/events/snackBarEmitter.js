@@ -1,7 +1,5 @@
 import React from "react";
-import { EventEmitter } from "events";
-
-const snackbarEmitter = new EventEmitter();
+import eventEmitter from "./EventEmitter";
 
 /**
  * Emits a 'showSnackbar' event with the provided message and duration.
@@ -10,7 +8,7 @@ const snackbarEmitter = new EventEmitter();
  * @param {number} [duration=5000] - The duration in milliseconds for which the snackbar should be displayed.
  */
 export const showSnackbar = (message, duration = 5000) => {
-  snackbarEmitter.emit("showSnackbar", { message, duration });
+  eventEmitter.emit("showSnackbar", { message, duration });
 };
 
 /**
@@ -21,9 +19,9 @@ export const showSnackbar = (message, duration = 5000) => {
  */
 export const useSnackbarEmitter = (callback) => {
   React.useEffect(() => {
-    snackbarEmitter.on("showSnackbar", callback);
+    eventEmitter.on("showSnackbar", callback);
     return () => {
-      snackbarEmitter.off("showSnackbar", callback);
+      eventEmitter.off("showSnackbar", callback);
     };
   }, [callback]);
 };
