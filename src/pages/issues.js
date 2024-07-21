@@ -52,7 +52,6 @@ const Issues = () => {
     setTimeout(() => {
       setLoading(false);
     }, 800);
-
   }, []);
 
   const saveDataToSessionStorage = () => {
@@ -151,13 +150,33 @@ const Issues = () => {
   };
 
   const handleRemoveUser = (id) => {
-    setAssignedUsers(assignedUsers.filter((user) => user.id !== id));
-    showSnackbar("User removed successfully", DEFAULT_SNACKBAR_DURATION);
+    showAlert(
+      "Remove Assigned User?",
+      "Are you sure you want to remove this assigned user?",
+      () => {
+        setAssignedUsers(assignedUsers.filter((user) => user.id !== id));
+        showSnackbar("Assigned user has been removed successfully.", DEFAULT_SNACKBAR_DURATION);
+      },
+      () => {},
+      "Yes",
+      "No"
+    );
   };
 
   const handleBulkRemoveUsers = (ids) => {
-    setAssignedUsers(assignedUsers.filter((user) => !ids.includes(user.id)));
-    showSnackbar("Users removed successfully", DEFAULT_SNACKBAR_DURATION);
+
+    showAlert(
+      "Removing Multiple Assigned Users?",
+      "Are you sure you want to remove these assigned users?",
+      () => {
+        setAssignedUsers(assignedUsers.filter((user) => !ids.includes(user.id)));
+        showSnackbar("Assigned users have been removed successfully.", DEFAULT_SNACKBAR_DURATION);
+      },
+      () => {},
+      "Yes",
+      "No"
+    );
+
   };
 
   const validateCreateIssue = () => {
@@ -185,9 +204,8 @@ const Issues = () => {
   };
 
   const handleLogout = () => {
-
     showAlert(
-      "Logout",
+      "Logout?",
       "Are you sure you want to logout?",
       () => {
         if (logout()) {
@@ -199,12 +217,12 @@ const Issues = () => {
       "Yes",
       "No"
     );
-  }
+  };
 
   return (
     <Box>
       <Box>
-        <Backdrop sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }} open={loading} >
+        <Backdrop sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }} open={loading}>
           <CircularProgress color="inherit" />
         </Backdrop>
       </Box>
@@ -213,7 +231,9 @@ const Issues = () => {
         <Box display={"flex"} justifyContent={"end"} gap={"15px"}>
           <Button
             variant="outlined"
-            onClick={() => {handleLogout();}}
+            onClick={() => {
+              handleLogout();
+            }}
           >
             Log Out
           </Button>
