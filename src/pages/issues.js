@@ -10,6 +10,8 @@ import CreateIssue from "../components/issue/CreateIssue";
 import AssignIssueContact from "../components/issue/AssignIssueContact";
 
 const Issues = () => {
+  const DEFAULT_SNACKBAR_DURATION = 3500;
+
   const [issue, setIssue] = useState({
     title: "",
     priority: "",
@@ -59,17 +61,20 @@ const Issues = () => {
       sessionStorage.setItem("assignedUsers", JSON.stringify(assignedUsers));
       sessionStorage.setItem("lastUpdatedOn", lastUpdated);
     } else {
-      showSnackbar("Unable to save data, Kindly refresh", 6500);
+      showSnackbar("Unable to save data, Kindly refresh", DEFAULT_SNACKBAR_DURATION);
       return;
     }
 
-    showSnackbar("Data saved successfully", 3500);
+    showSnackbar("Data saved successfully", DEFAULT_SNACKBAR_DURATION);
   };
 
-  const clearDataFromSessionStorage = () => {
+  const clearDataFromStorage = () => {
     sessionStorage.removeItem("issue");
     sessionStorage.removeItem("assignedUsers");
     sessionStorage.removeItem("lastUpdatedOn");
+    localStorage.removeItem("issue");
+    localStorage.removeItem("assignedUsers");
+    localStorage.removeItem("lastUpdatedOn");
   };
 
   const handleCreateIssueInputChange = (e) => {
@@ -129,7 +134,7 @@ const Issues = () => {
           },
         ];
         setAssignedUsers(newUser);
-        showSnackbar("User assigned successfully", 3000);
+        showSnackbar("User assigned successfully", DEFAULT_SNACKBAR_DURATION);
       }
     } else {
       console.warn("Please select role and user");
@@ -138,10 +143,12 @@ const Issues = () => {
 
   const handleRemoveUser = (id) => {
     setAssignedUsers(assignedUsers.filter((user) => user.id !== id));
+    showSnackbar("User removed successfully", DEFAULT_SNACKBAR_DURATION);
   };
 
   const handleBulkRemoveUsers = (ids) => {
     setAssignedUsers(assignedUsers.filter((user) => !ids.includes(user.id)));
+    showSnackbar("Users removed successfully", DEFAULT_SNACKBAR_DURATION);
   };
 
   const validateCreateIssue = () => {
@@ -176,7 +183,7 @@ const Issues = () => {
             variant="outlined"
             onClick={() => {
               if (logout()) {
-                clearDataFromSessionStorage();
+                clearDataFromStorage();
                 navigate("/login");
               }
             }}
