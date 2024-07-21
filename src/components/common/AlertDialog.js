@@ -8,6 +8,11 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import eventEmitter from "../../events/EventEmitter";
 
+/**
+ * Renders an alert dialog component.
+ *
+ * @return {JSX.Element} The alert dialog component.
+ */
 const AlertDialog = () => {
   const [open, setOpen] = useState(false);
   const [config, setConfig] = useState({
