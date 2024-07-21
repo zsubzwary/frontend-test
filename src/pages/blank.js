@@ -11,7 +11,7 @@ import { isUserLoggedIn } from "../util/Helper";
 const BlankPage = () => {
 
   const navigate = useNavigate()
-  useEffect(() => {
+  React.useEffect(() => {
     if(!isUserLoggedIn()){
       navigate("/login");
     }
