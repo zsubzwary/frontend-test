@@ -2,6 +2,8 @@
 
 This project is a React-based web application designed to manage issues within a system. The application includes features for user authentication, issue tracking, and managing user roles and assignments. Below is a detailed guide on how to run the application locally, along with an overview of the features implemented beyond the initial requirements.
 
+> If you want to use the hosted version of this app [Click Here](https://zsubzwary.github.io/frontend-test/) 
+
 ## Table of Contents
 1. [Features](#features)
 2. [Setup Instructions](#setup-instructions)
@@ -110,7 +112,7 @@ This project is a React-based web application designed to manage issues within a
    npm start
    ```
 
-2. Open your browser and navigate to `http://localhost:3000`.
+2. Open your browser and navigate to `http://localhost:3000/frontend-test`.
 
 ## Usage
 
