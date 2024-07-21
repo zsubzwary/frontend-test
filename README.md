@@ -49,62 +49,65 @@ This project is a React-based web application designed to manage issues within a
 
 ## Project Structure
 
-```├── README.md
-├── package-lock.json
-├── package.json
+```sh
 ├── public
-│   ├── favicon.ico
-│   ├── index.html
-│   ├── logo192.png
-│   ├── logo512.png
-│   ├── manifest.json
-│   └── robots.txt
-└── src
-    ├── App.css
-    ├── App.js
-    ├── App.test.js
-    ├── assets
-    │   ├── eye.svg
-    │   ├── login.svg
-    │   ├── logo.svg
-    │   ├── password-lock.svg
-    │   └── username.svg
-    ├── components
-    │   ├── NavigationMenu.js
-    │   ├── common
-    │   │   ├── AlertDialog.js
-    │   │   ├── DarkModeSwitch.js
-    │   │   └── GlobalSnackBar.js
-    │   ├── issue
-    │   │   ├── AssignIssueContact.js
-    │   │   ├── CreateIssue.js
-    │   │   └── IssueContactDataGrid.js
-    │   └── layout
-    │       └── MainLayout.js
-    ├── css
-    │   └── issue-page.css
-    ├── events
-    │   ├── AlertDialogEmitter.js
-    │   ├── EventEmitter.js
-    │   └── SnackBarEmitter.js
-    ├── index.css
-    ├── index.js
-    ├── logo.svg
-    ├── pages
-    │   ├── Blank.js
-    │   ├── Dashboard.js
-    │   ├── Issues.js
-    │   └── Login.js
-    ├── reportWebVitals.js
-    ├── setupTests.js
-    ├── themes
-    │   ├── Dark.js
-    │   ├── Default.js
-    │   └── Light.js
-    └── util
-        ├── Helper.js
-        ├── MockData.js
-        └── ProtectedRoutes.js
+│   ├── 404.html
+│   ├── electrified_gingerbread_man.gif
+│   ├── favicon.ico
+│   ├── index.html
+│   ├── logo192.png
+│   ├── logo512.png
+│   ├── manifest.json
+│   └── robots.txt
+├── src
+│   ├── assets
+│   │   ├── eye.svg
+│   │   ├── login.svg
+│   │   ├── logo.svg
+│   │   ├── password-lock.svg
+│   │   └── username.svg
+│   ├── components
+│   │   ├── common
+│   │   │   ├── AlertDialog.js
+│   │   │   ├── DarkModeSwitch.js
+│   │   │   └── GlobalSnackBar.js
+│   │   ├── issue
+│   │   │   ├── AssignIssueContact.js
+│   │   │   ├── CreateIssue.js
+│   │   │   └── IssueContactDataGrid.js
+│   │   ├── layout
+│   │   │   └── MainLayout.js
+│   │   └── NavigationMenu.js
+│   ├── css
+│   │   └── issue-page.css
+│   ├── events
+│   │   ├── AlertDialogEmitter.js
+│   │   ├── EventEmitter.js
+│   │   └── SnackBarEmitter.js
+│   ├── pages
+│   │   ├── Blank.js
+│   │   ├── Dashboard.js
+│   │   ├── Issues.js
+│   │   └── Login.js
+│   ├── themes
+│   │   ├── Dark.js
+│   │   ├── Default.js
+│   │   └── Light.js
+│   ├── util
+│   │   ├── Helper.js
+│   │   ├── MockData.js
+│   │   └── ProtectedRoutes.js
+│   ├── App.css
+│   ├── App.js
+│   ├── App.test.js
+│   ├── index.css
+│   ├── index.js
+│   ├── logo.svg
+│   ├── reportWebVitals.js
+│   └── setupTests.js
+├── README.md
+├── package-lock.json
+└── package.json
 ```
 
 ## Running the Application
