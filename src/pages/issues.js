@@ -54,7 +54,7 @@ const Issues = () => {
     }, 800);
   }, []);
 
-  const saveDataToSessionStorage = () => {
+  const saveDataToStorage = () => {
     let lastUpdated = moment().toISOString();
     //NOTE: 👆 The reason moment object is created in here instead of getting the value from the state is
     //          because the value in state might not have been updated yet,
@@ -160,7 +160,6 @@ const Issues = () => {
   };
 
   const handleBulkRemoveUsers = (ids) => {
-
     showAlert(
       "Removing Multiple Assigned Users?",
       "Are you sure you want to remove these assigned users?",
@@ -172,7 +171,6 @@ const Issues = () => {
       "Yes",
       "No"
     );
-
   };
 
   const validateCreateIssue = () => {
@@ -195,7 +193,7 @@ const Issues = () => {
 
     if (isValid) {
       setLastUpdatedOn(moment());
-      saveDataToSessionStorage();
+      saveDataToStorage();
       console.log("Current changes - Saved:", issue);
     }
   };
