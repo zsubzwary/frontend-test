@@ -40,6 +40,10 @@ const Issues = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    if (!isUserLoggedIn()) {
+      navigate("/login");
+    }
+
     const savedIssue = sessionStorage.getItem("issue") || localStorage.getItem("issue");
     const savedAssignedUsers = sessionStorage.getItem("assignedUsers") || localStorage.getItem("assignedUsers");
     const savedLastUpdatedOn = sessionStorage.getItem("lastUpdatedOn") || localStorage.getItem("lastUpdatedOn");
